@@ -1,0 +1,21 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="mydemoproject.mycontrollers.tileview" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Tile View">
+		<content>
+		<FlexBox
+				height="400px"
+				alignItems="Center"
+				justifyContent="Center">
+		<GenericTile header="Products Application"
+		 press=".onpress">
+		<TileContent footer="Browse Products">
+			<ImageContent src="sap-icon://retail-store" />
+			</TileContent>
+			<TileContent>
+			<ImageContent src="sap-icon://retail-store-manager" />
+		</TileContent>
+	</GenericTile>
+	</FlexBox>
+		</content>
+	</Page>
+</core:View>

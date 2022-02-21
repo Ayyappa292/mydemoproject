@@ -1,0 +1,42 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="mydemoproject.mycontrollers.payment" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Payment Page" showNavButton="true" navButtonPress=".gotoapp">
+		<content>
+		<Text text="Order Summary"/>
+	<f:SimpleForm maxContainerCols="2"
+			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
+			emptySpanL="0" columnsL="1" columnsM="1" title="Enter Your Shipping Details">
+			<f:content>
+				<Label text="Your Name" required="true"/>
+					<Input id="name" width="30%"/>
+				<Label text="Address" required="true"/>
+					<Input id="address" width="40%"/>
+				<Label text="City" required="true"/>
+					<Input id="city" width="20%"/>
+					<Label text="State" required="true"/>
+					<Input id="state" width="20%"/>
+					<Label text="Pincode" required="true"/>
+					<Input id="pincode" width="20%"/>
+			</f:content>
+		</f:SimpleForm>
+		<f:SimpleForm maxContainerCols="2"
+			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
+			emptySpanL="0" columnsL="1" columnsM="1" title="Payment Details">
+			<f:content>
+				<Label text="Card Number" required="true"/>
+					<Input id="cardno" width="30%"/>
+				<Label text="Name on Card" required="true"/>
+					<Input id="cardname" width="30%"/>
+				<Label text="Expiry Date" required="true"/>
+					<Input id="expirydate" width="20%"/>
+					<Label text="CVV" required="true"/>
+					<Input id="cvv" width="20%"/>
+				<Button text="Submit" width="20%" press=".onsubmitpayment"/>
+			</f:content>
+		</f:SimpleForm>
+		
+		
+		</content>
+	</Page>
+</core:View>
