@@ -6,7 +6,7 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page id="cartpage" title="MyCart" showNavButton="true" navButtonPress=".gotoapp">
 	<content>
-					<Table items="{mymodel>/cart}" id="carttable" mode="MultiSelect">
+					<Table items="{mymodel>/cart}" id="carttable2" mode="SingleSelect">
 							<columns>
 								<Column>
 									<Text text="Product Name" />
@@ -46,7 +46,7 @@
 							<Toolbar>
 							<ToolbarSpacer />
 							<Label text="Total Price:"/>
-						<Text id="cartvalue" width="10%" text=""/>
+						<Text id="cartvalue" width="10%" text="{mymodel>/cartvalue}$"/>
 						<Button text="Procced to Payment" press=".onpayment"/>
 								</Toolbar>
 						</footer>

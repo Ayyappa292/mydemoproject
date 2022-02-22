@@ -14,6 +14,9 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 		 oRouter.navTo("cartview");
 		 this.getView().byId("cartvalue");
 	 },
+	 onsubmitpayment : function(){
+		 alert("your order is placed successfully");
+	 }
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).

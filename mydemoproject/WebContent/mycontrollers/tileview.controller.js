@@ -21,6 +21,8 @@ oncancledetails : function(){
 },
 onsubmitdetails : function(){
 	debugger;
+	let omodel=this.getView().getModel("mymodel");
+	omodel.getProperty("/username");
 	let sname = sap.ui.getCore().byId("username").getValue();
 	let nnumber = sap.ui.getCore().byId("mobile").getValue();
 	let semail =  sap.ui.getCore().byId("emailid").getValue();
@@ -46,6 +48,7 @@ onsubmitdetails : function(){
 	if(nnumberpattern.test(nnumber))
 		{
 		sap.ui.getCore().byId("mobile").setValueState(sap.ui.core.ValueState.None);
+		omodel.setProperty("/username",sname);
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		 oRouter.navTo("secondview");
 		}
@@ -53,8 +56,6 @@ onsubmitdetails : function(){
 	{
 		sap.ui.getCore().byId("mobile").setValueState(sap.ui.core.ValueState.Error);
 	}
-	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-	 oRouter.navTo("secondview");
 }
 
 /**

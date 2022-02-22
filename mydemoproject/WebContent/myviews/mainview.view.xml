@@ -2,13 +2,13 @@
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 		controllerName="mydemoproject.mycontrollers.mainview" xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true">
-	<tnt:ToolHeader active="true">
-				<Text text="Welcome User" id="userid"/>
+	<tnt:ToolHeader active="true" >
+				<Text text="Welcome {mymodel>/username}" id="userid"/>
 				<ToolbarSpacer />
-				<Toolbar>
+				<Toolbar >
 				</Toolbar>
-				<Button text="MyCart" icon="sap-icon://cart"
-					type="Transparent" press="oncart" />
+				<Button text="MyCart" icon="sap-icon://cart" 
+					type="Transparent" press="oncart"/>
 			</tnt:ToolHeader>
 			<SplitApp id="splitapp" initialDetail="detail"
 				initialMaster="master">
@@ -40,7 +40,7 @@
 								</Column>
 							</columns>
 							<items>
-								<ColumnListItem type="Active">
+								<ColumnListItem >
 									<cells>
 										<Text text="{mymodel>productname}" />
 										<HBox>
@@ -70,6 +70,9 @@
 							</items>
 							
 						</Table>
+					</Page>
+					<Page id="demo2" title="detail products">
+					<Text text="Hi i am in table item detail page"/>
 					</Page>
 									</detailPages>
 				<masterPages>

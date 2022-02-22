@@ -2,7 +2,8 @@ sap.ui.define([
         "sap/ui/core/mvc/Controller",
     	"sap/ui/model/Filter",
     	"sap/ui/model/FilterOperator",
-              ],function(Controller,Filter,FilterOperator){
+    	"sap/m/MessageToast",
+              ],function(Controller,Filter,FilterOperator,MessageToast){
 	              "use strict";
 	  return Controller.extend("mydemoproject.mycontrollers.mainview",{
 /*	onInit: function() {
@@ -58,11 +59,15 @@ sap.ui.define([
 				price:np
 			});
 			omodel.setProperty("/cart",odata);
-			let oldprice=this.getView().byId("cartvalue").getValue();
+			MessageToast.show("Item Added Successfully");
+			let oldprice=omodel.getProperty("/cartvalue");
 			 let na=parseInt(oldprice);
-			 let nb=parseInt(op);
+			 let nb=parseInt(np);
 			 let newprice = na+nb;
-			 this.getView().byId("cartvalue").setValue(newprice);
+			 omodel.setProperty("/cartvalue",newprice);
+			 omodel.getProperty("/noitems");
+			 let olen=odata.length;
+			 omodel.setProperty("/noitems",olen);
 			
 		},
 		oncart : function(){
@@ -78,7 +83,16 @@ sap.ui.define([
 				{
 				alert("Add at least one Product to View Cart");
 				}
-		}
+		},
+		onitempress : function(oEvent){
+			debugger;
+			//let list = this.getView().byId("id2").getSelectedItem();
+			var sToPageId = oEvent.getParameter("id2")
+			.getCustomData()[0].getValue();
+			this.getSplitAppObj()
+			.toDetail(this.createId(sToPageId));
+		},
+		
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).

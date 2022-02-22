@@ -30,7 +30,8 @@ onpayment : function(){
 },
 oncancelitem : function(oEvent){
 	debugger;
-	 var oTable = this.getView().byId("carttable");
+	/*var omodel= this.getView().getModel("mymodel");
+	 var oTable = this.getView().byId("carttable2");
 	 var aSelectedItems = oTable.getSelectedItems();
 	 let op =oEvent.getSource().getBindingContext("mymodel").getObject("price");
 	 if(aSelectedItems.length==0)
@@ -41,13 +42,34 @@ oncancelitem : function(oEvent){
 		 {
 	 for(var i=0; i<aSelectedItems.length; i++){
 	    oTable.removeItem(aSelectedItems[i])
+	    sap.m.MessageToast.show("Item Removed");
 	 }
-	 let oldprice=this.getView().byId("cartvalue").getValue();
+	 let oldprice=omodel.getProperty("/cartvalue");
 	 let na=parseInt(oldprice);
 	 let nb=parseInt(op);
 	 let newprice = na-nb;
-	 this.getView().byId("cartvalue").setValue(newprice);
-	 }
+	 omodel.setProperty("/cartvalue",newprice);
+	 }*/
+	let np =oEvent.getSource().getBindingContext("mymodel").getObject("price");
+	var deleteRecord = oEvent.getSource().getBindingContext("mymodel").getObject();
+	var omodel=this.getView().getModel("mymodel");
+	var odata=omodel.getProperty("/cart");
+	for(var i=0;i<odata.length;i++){
+		if(odata[i] == deleteRecord )
+			{
+			odata.splice(i,1);
+		omodel.setProperty("/cart",odata);
+		let oldprice=omodel.getProperty("/cartvalue");
+		 let na=parseInt(oldprice);
+		 let nb=parseInt(np);
+		 let newprice = na-nb;
+		 omodel.setProperty("/cartvalue",newprice);
+		 omodel.getProperty("/noitems");
+		 let olen=odata.length;
+		 omodel.setProperty("/noitems",olen);
+			}
+		break;
+	}
 }
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

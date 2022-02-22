@@ -3,40 +3,100 @@
 	controllerName="mydemoproject.mycontrollers.payment" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Payment Page" showNavButton="true" navButtonPress=".gotoapp">
 		<content>
-		<Text text="Order Summary"/>
-	<f:SimpleForm maxContainerCols="2"
-			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
-			emptySpanL="0" columnsL="1" columnsM="1" title="Enter Your Shipping Details">
-			<f:content>
-				<Label text="Your Name" required="true"/>
-					<Input id="name" width="30%"/>
-				<Label text="Address" required="true"/>
-					<Input id="address" width="40%"/>
-				<Label text="City" required="true"/>
-					<Input id="city" width="20%"/>
-					<Label text="State" required="true"/>
-					<Input id="state" width="20%"/>
-					<Label text="Pincode" required="true"/>
-					<Input id="pincode" width="20%"/>
-			</f:content>
+		<f:SimpleForm>
+		<f:content>
+		<Text text="Order Summary" class="text1"/>
+		<Label text="Total No of Items"/>
+		<Text text="{mymodel>/noitems}"/>
+		<Label text="Total Amount to be paid"/>
+		<Text text="{mymodel>/cartvalue}$"/>
+		</f:content>
 		</f:SimpleForm>
-		<f:SimpleForm maxContainerCols="2"
-			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
-			emptySpanL="0" columnsL="1" columnsM="1" title="Payment Details">
-			<f:content>
-				<Label text="Card Number" required="true"/>
-					<Input id="cardno" width="30%"/>
-				<Label text="Name on Card" required="true"/>
-					<Input id="cardname" width="30%"/>
-				<Label text="Expiry Date" required="true"/>
-					<Input id="expirydate" width="20%"/>
-					<Label text="CVV" required="true"/>
-					<Input id="cvv" width="20%"/>
+		<f:SimpleForm id="FieldGroupView" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Shopping Cart - Checkout" labelSpanL="4" labelSpanM="4"
+				emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2"
+				validateFieldGroup="onValidateFieldGroup">
+				<f:content>
+					<core:Title text="Billing Information" />
+					<Label text="Name" />
+					<Input fieldGroupIds="Billing Information" />
+					<Label text="Street/No." />
+					<Input fieldGroupIds="Billing Information" />
+					<Input fieldGroupIds="Billing Information" >
+						<layoutData>
+							<l:GridData span="L3 M3 S4" />
+						</layoutData>
+					</Input>
+					<Label text="ZIP Code/City" />
+					<Input fieldGroupIds="Billing Information" >
+						<layoutData>
+							<l:GridData span="L3 M3 S4" />
+						</layoutData>
+					</Input>
+					<Input fieldGroupIds="Billing Information" />
+					<Label text="Country" />
+					<Select fieldGroupIds="Billing Information" width="100%" >
+						<items>
+							<core:Item text=""/>
+							<core:Item text="India" key="India" />
+							<core:Item text="United States" key="United States" />
+						</items>
+					</Select>
+					<core:Title text="Discount Code" />
+					<Input fieldGroupIds="Discount Code" placeholder="Enter your discout code here..."/>
+					<core:Title text="Credit Card" />
+					<Label text="Vendor" />
+					<ComboBox fieldGroupIds="Credit Card" width="100%" placeholder="Choose your card vendor..." >
+						<items>
+							<core:Item text="Mastercard" />
+							<core:Item text="Visa" />
+							<core:Item text="American Express" />
+						</items>
+					</ComboBox>
+					<Label text="Credit Card Number" />
+					<Input fieldGroupIds="Credit Card"/>
+					<Label text="Expiry Date" />
+					<ComboBox fieldGroupIds="Credit Card" >
+						<items>
+							<core:Item text="01" />
+							<core:Item text="02" />
+							<core:Item text="03" />
+							<core:Item text="04" />
+							<core:Item text="05" />
+							<core:Item text="06" />
+							<core:Item text="06" />
+							<core:Item text="07" />
+							<core:Item text="08" />
+							<core:Item text="09" />
+							<core:Item text="10" />
+							<core:Item text="11" />
+							<core:Item text="12" />
+						</items>
+					</ComboBox>
+					<ComboBox fieldGroupIds="Credit Card" >
+						<items>
+							<core:Item text="2015" />
+							<core:Item text="2016" />
+							<core:Item text="2017" />
+							<core:Item text="2018" />
+							<core:Item text="2019" />
+							<core:Item text="2020" />
+							<core:Item text="2021" />
+							<core:Item text="2022" />
+							<core:Item text="2023" />
+							<core:Item text="2024" />
+							<core:Item text="2025" />
+							<core:Item text="2026" />
+						</items>
+					</ComboBox>
+					<Label text="CVV" />
+					<Input fieldGroupIds="Credit Card" />
+					<Label />
 				<Button text="Submit" width="20%" press=".onsubmitpayment"/>
-			</f:content>
-		</f:SimpleForm>
-		
-		
-		</content>
+				</f:content>
+					
+			</f:SimpleForm>
+					</content>
 	</Page>
 </core:View>
