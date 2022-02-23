@@ -4,53 +4,51 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 	controllerName="mydemoproject.mycontrollers.cart"
 	xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page id="cartpage" title="MyCart" showNavButton="true" navButtonPress=".gotoapp">
-	<content>
-					<Table items="{mymodel>/cart}" id="carttable2" mode="SingleSelect">
-							<columns>
-								<Column>
-									<Text text="Product Name" />
-								</Column>
-								<Column>
-									<Text text="Prodcut Image" />
-								</Column>
-								<Column>
-									<Text text="Price" />
-								</Column>
-								<Column>
-								</Column>
-							</columns> 
-							<items>
-								<ColumnListItem>
-									<cells>
-										<Text text="{mymodel>productname}" />
-										<HBox>
-										<Image
-					src="{mymodel>productimage}"
-					decorative="false"
-					width="170px"
-					densityAware="false">
-				</Image>
-										</HBox>
-										<Text text="{mymodel>price}" />
-										<HBox>
-										<Button icon="sap-icon://delete" press=".oncancelitem"/>
-										</HBox>	
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					
-						</content>
-							<footer>
-							<Toolbar>
-							<ToolbarSpacer />
-							<Label text="Total Price:"/>
-						<Text id="cartvalue" width="10%" text="{mymodel>/cartvalue}$"/>
-						<Button text="Procced to Payment" press=".onpayment"/>
-								</Toolbar>
-						</footer>
-					</Page>
-	
+	<Page id="cartpage" title="MyCart" showNavButton="true"
+		navButtonPress=".gotoapp">
+		<content>
+			<Table items="{mymodel>/cart}" id="carttable2">
+				<columns>
+					<Column>
+						<Text text="Product Name" />
+					</Column>
+					<Column>
+						<Text text="Prodcut Image" />
+					</Column>
+					<Column>
+						<Text text="Price" />
+					</Column>
+					<Column>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{mymodel>productname}" />
+							<HBox>
+								<Image src="{mymodel>productimage}" decorative="false"
+									width="170px" densityAware="false">
+								</Image>
+							</HBox>
+							<Text text="{mymodel>price}" />
+							<HBox>
+								<Button icon="sap-icon://delete" press=".oncancelitem" />
+							</HBox>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Label text="Total Price:" />
+				<Text id="cartvalue" width="10%" text="{mymodel>/cartvalue}$" />
+				<Button text="Procced to Payment" press=".onpayment" />
+			</Toolbar>
+		</footer>
+	</Page>
+
 
 </core:View>

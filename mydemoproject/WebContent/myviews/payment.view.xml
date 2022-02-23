@@ -1,18 +1,21 @@
-<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
-	controllerName="mydemoproject.mycontrollers.payment" xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page title="Payment Page" showNavButton="true" navButtonPress=".gotoapp">
+<core:View xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	controllerName="mydemoproject.mycontrollers.payment"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Payment Page" showNavButton="true"
+		navButtonPress=".gotoapp">
 		<content>
-		<f:SimpleForm>
-		<f:content>
-		<Text text="Order Summary" class="text1"/>
-		<Label text="Total No of Items"/>
-		<Text text="{mymodel>/noitems}"/>
-		<Label text="Total Amount to be paid"/>
-		<Text text="{mymodel>/cartvalue}$"/>
-		</f:content>
-		</f:SimpleForm>
-		<f:SimpleForm id="FieldGroupView" minWidth="1024"
+			<f:SimpleForm>
+				<f:content>
+					<Text text="Order Summary" class="text1" />
+					<Label text="Total No of Items" />
+					<Text text="{mymodel>/noitems}" />
+					<Label text="Total Amount to be paid" />
+					<Text text="{mymodel>/cartvalue}$" />
+				</f:content>
+			</f:SimpleForm>
+			<f:SimpleForm id="FieldGroupView" minWidth="1024"
 				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				title="Shopping Cart - Checkout" labelSpanL="4" labelSpanM="4"
 				emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2"
@@ -23,31 +26,33 @@
 					<Input fieldGroupIds="Billing Information" />
 					<Label text="Street/No." />
 					<Input fieldGroupIds="Billing Information" />
-					<Input fieldGroupIds="Billing Information" >
+					<Input fieldGroupIds="Billing Information">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
 					<Label text="ZIP Code/City" />
-					<Input fieldGroupIds="Billing Information" >
+					<Input fieldGroupIds="Billing Information" type="Number">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
 					<Input fieldGroupIds="Billing Information" />
 					<Label text="Country" />
-					<Select fieldGroupIds="Billing Information" width="100%" >
+					<Select fieldGroupIds="Billing Information" width="100%">
 						<items>
-							<core:Item text=""/>
+							<core:Item text="" />
 							<core:Item text="India" key="India" />
 							<core:Item text="United States" key="United States" />
 						</items>
 					</Select>
 					<core:Title text="Discount Code" />
-					<Input fieldGroupIds="Discount Code" placeholder="Enter your discout code here..."/>
+					<Input fieldGroupIds="Discount Code"
+						placeholder="Enter your discout code here..." />
 					<core:Title text="Credit Card" />
 					<Label text="Vendor" />
-					<ComboBox fieldGroupIds="Credit Card" width="100%" placeholder="Choose your card vendor..." >
+					<ComboBox fieldGroupIds="Credit Card" width="100%"
+						placeholder="Choose your card vendor...">
 						<items>
 							<core:Item text="Mastercard" />
 							<core:Item text="Visa" />
@@ -55,9 +60,9 @@
 						</items>
 					</ComboBox>
 					<Label text="Credit Card Number" />
-					<Input fieldGroupIds="Credit Card"/>
+					<Input fieldGroupIds="Credit Card" type="Number" />
 					<Label text="Expiry Date" />
-					<ComboBox fieldGroupIds="Credit Card" >
+					<ComboBox fieldGroupIds="Credit Card">
 						<items>
 							<core:Item text="01" />
 							<core:Item text="02" />
@@ -74,7 +79,7 @@
 							<core:Item text="12" />
 						</items>
 					</ComboBox>
-					<ComboBox fieldGroupIds="Credit Card" >
+					<ComboBox fieldGroupIds="Credit Card">
 						<items>
 							<core:Item text="2015" />
 							<core:Item text="2016" />
@@ -91,12 +96,11 @@
 						</items>
 					</ComboBox>
 					<Label text="CVV" />
-					<Input fieldGroupIds="Credit Card" />
+					<Input fieldGroupIds="Credit Card" type="Number" />
 					<Label />
-				<Button text="Submit" width="20%" press=".onsubmitpayment"/>
+					<Button text="Submit" width="20%" press=".onsubmitpayment" />
 				</f:content>
-					
 			</f:SimpleForm>
-					</content>
+		</content>
 	</Page>
 </core:View>

@@ -8,13 +8,14 @@
 			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
 			emptySpanL="0" columnsL="1" columnsM="1">
 			<f:content>
-				<Label text="Your Name" required="true"/>
-					<Input id="username" width="40%"/>
-				<Label text="Mobile Number" required="true"/>
-					<Input id="mobile" width="40%"/>
-				<Label text="E-mail ID" required="true"/>
-					<Input id="emailid" width="40%"/>
-				<Button text="Submit" width="20%" press=".onsubmitdetails"/><Button text="Cancle" width="20%"  press=".oncancledetails"/>
+				<Label text="Your Name" required="true" />
+				<Input id="username" width="40%" />
+				<Label text="Mobile Number" required="true" />
+				<Input id="mobile" width="40%" />
+				<Label text="E-mail ID" required="true" />
+				<Input id="emailid" width="40%" />
+				<Button text="Submit" width="20%" press=".onsubmitdetails" />
+				<Button text="Cancle" width="20%" press=".oncancledetails" />
 			</f:content>
 		</f:SimpleForm>
 	</Dialog>

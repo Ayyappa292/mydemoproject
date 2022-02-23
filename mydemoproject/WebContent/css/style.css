@@ -1,13 +1,15 @@
-.hello{
+.hello {
 	margin-top: 5cm;
-    margin-left: 15cm;
-     padding: 0px;
+	margin-left: 15cm;
+	padding: 0px;
 }
-.hello1{
+
+.hello1 {
 	font-size: 25px;
-	margin-top :1cm;
-	margin-left:10cm;
+	margin-top: 1cm;
+	margin-left: 10cm;
 }
-.text1{
-	font-size:25px;
+
+.text1 {
+	font-size: 25px;
 }

@@ -20,7 +20,7 @@
 		]
 	},
 	"sap.ui5": {
-	"rootView": "mydemoproject.myviews.tileview",
+		"rootView": "mydemoproject.myviews.tileview",
 		"dependencies": {
 			"minUI5Version": "1.30",
 			"libs": {
@@ -29,74 +29,74 @@
 				}
 			}
 		},
-		"models":{
-		"mymodel": {
-			"type": "sap.ui.model.json.JSONModel",
-			"uri": "data/mydata.json"
+		"models": {
+			"mymodel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "data/mydata.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "mydemoproject.myviews",
+				"controlId": "App",
+				"controlAggregation": "pages"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "firstview",
+					"target": "firstview"
+				},
+				{
+					"pattern": "secondview",
+					"name": "secondview",
+					"target": "secondview"
+				},
+				{
+					"pattern": "cartview",
+					"name": "cartview",
+					"target": "cartview"
+				},
+				{
+					"pattern": "paymentview",
+					"name": "paymentview",
+					"target": "paymentview"
+				}
+			],
+			"targets": {
+				"firstview": {
+					"viewName": "tileview",
+					"viewType": "XML",
+					"viewId": "view1",
+					"viewLevel": 1
+				},
+				"secondview": {
+					"viewName": "mainview",
+					"viewType": "XML",
+					"viewId": "view2",
+					"viewLevel": 2
+				},
+				"cartview": {
+					"viewName": "cart",
+					"viewType": "XML",
+					"viewId": "view3"
+				},
+				"paymentview": {
+					"viewName": "payment",
+					"viewType": "XML",
+					"ViewId": "view4"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		}
-		}, 
-		 "routing": {
-           "config": {
-                "routerClass": "sap.m.routing.Router",
-                "viewType": "XML",
-                "async" : true,
-                "viewPath": "mydemoproject.myviews",
-                "controlId":"App",
-                "controlAggregation": "pages"
-            },
-            "routes": [
-                {
-                    "pattern": "",
-                    "name": "firstview",
-                    "target": "firstview"
-                },
-                 {
-                    "pattern": "secondview",
-                    "name": "secondview",
-                    "target": "secondview"
-                },
-                {
-                "pattern":"cartview",
-                "name":"cartview",
-                "target":"cartview"
-                },
-                {
-                "pattern":"paymentview",
-                "name":"paymentview",
-                "target":"paymentview"
-                }     
-            ],
-            "targets":{
-            "firstview":{
-            "viewName":"tileview",
-            "viewType": "XML",
-            "viewId":"view1",
-            "viewLevel":1
-            },
-            "secondview":{
-            "viewName":"mainview",
-            "viewType": "XML",
-            "viewId":"view2",
-            "viewLevel":2
-            },
-            "cartview":{
-            "viewName":"cart",
-            "viewType":"XML",
-            "viewId":"view3"
-            },
-            "paymentview":{
-            "viewName":"payment",
-            "viewType":"XML",
-            "ViewId":"view4"
-            }
-            }
-        },
-	"resources": {
-	  "css": [
-		{
-		  "uri": "css/style.css"
-		}
-	  ]
-	}
 	}
 }
