@@ -11,14 +11,81 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 	// onInit: function() {
 	//
 	// },
-	gotoapp : function() {
+	/**
+	 * This Function goes Back to the Cart Page
+	 */
+	onGoToCart : function() {
 		debugger;
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		oRouter.navTo("cartview");
 		this.getView().byId("cartvalue");
 	},
-	onsubmitpayment : function() {
-		alert("your order is placed successfully");
+	/**
+	 * Payment Validation is Done here 
+	 */
+	onSubmitPayment : function() {
+		debugger;
+		let sName = this.getView().byId("name").getValue();
+		let sStreetName = this.getView().byId("streetname").getValue();
+		let nStreetNo = this.getView().byId("streetno").getValue();
+		let nCode = this.getView().byId("zipcode").getValue();
+		let sCity = this.getView().byId("city").getValue();
+		let nCardNo = this.getView().byId("cardno").getValue();
+		let nCvv = this.getView().byId("cvv").getValue();
+		let sNamePattern = /^[a-zA-Z\s]{3,15}$/; 
+		let sStreetNamePattern= /^[a-zA-Z\s]{3,15}$/; 
+		let nStreetNoPattern = /^[a-zA-Z0-9-\_\/]$/;
+		let nCodePattern = /^[0-9]{5}$/;
+		let sCityPattern = /^[a-zA-Z\s]{3,10}$/;
+		let nCardNoPattern = /^[0-9]{16}$/;
+		let nCvvPattern = /^[0-9]{3}$/;
+		if (sNamePattern.test(sName)) 
+		{
+			this.getView().byId("name").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("name").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (sStreetNamePattern.test(sStreetName))
+		{
+			this.getView().byId("streetname").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("streetname").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (nStreetNoPattern.test(nStreetNo)) 
+		{
+			this.getView().byId("streetno").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("streetno").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (nCodePattern.test(nCode))
+		{
+			this.getView().byId("zipcode").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("zipcode").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (sCityPattern.test(sCity)) 
+		{
+			this.getView().byId("city").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("city").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (nCardNoPattern.test(nCardNo)) 
+		{
+			this.getView().byId("cardno").setValueState(sap.ui.core.ValueState.None);
+		} else {
+			this.getView().byId("cardno").setValueState(sap.ui.core.ValueState.Error);
+		}
+		if (nCvvPattern.test(nCvv))
+		{
+			this.getView().byId("cvv").setValueState(sap.ui.core.ValueState.None);
+			new sap.m.MessageToast.show("your order is placed Successfully");
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			 oRouter.navTo("mybilldetails");
+		} else {
+			this.getView().byId("cvv").setValueState(sap.ui.core.ValueState.Error);
+			alert("Please Enter all your details")
+		}
+		
 	}
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's

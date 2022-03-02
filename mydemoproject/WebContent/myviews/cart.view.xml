@@ -5,7 +5,7 @@
 	controllerName="mydemoproject.mycontrollers.cart"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page id="cartpage" title="MyCart" showNavButton="true"
-		navButtonPress=".gotoapp">
+		navButtonPress=".onGoToApp">
 		<content>
 			<Table items="{mymodel>/cart}" id="carttable2">
 				<columns>
@@ -32,7 +32,7 @@
 							</HBox>
 							<Text text="{mymodel>price}" />
 							<HBox>
-								<Button icon="sap-icon://delete" press=".oncancelitem" />
+								<Button icon="sap-icon://delete" press=".onCancelItem" />
 							</HBox>
 						</cells>
 					</ColumnListItem>
@@ -45,7 +45,7 @@
 				<ToolbarSpacer />
 				<Label text="Total Price:" />
 				<Text id="cartvalue" width="10%" text="{mymodel>/cartvalue}$" />
-				<Button text="Procced to Payment" press=".onpayment" />
+				<Button text="Procced to Payment" press=".onPayment" />
 			</Toolbar>
 		</footer>
 	</Page>

@@ -4,18 +4,20 @@
 	controllerName="mydemoproject.mycontrollers.tileview"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Dialog title="Please enter Details to Continue">
-		<f:SimpleForm maxContainerCols="2"
-			layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2"
-			emptySpanL="0" columnsL="1" columnsM="1">
+		<f:SimpleForm layout="ResponsiveGridLayout" >
 			<f:content>
-				<Label text="Your Name" required="true" />
-				<Input id="username" width="40%" />
-				<Label text="Mobile Number" required="true" />
-				<Input id="mobile" width="40%" />
-				<Label text="E-mail ID" required="true" />
-				<Input id="emailid" width="40%" />
-				<Button text="Submit" width="20%" press=".onsubmitdetails" />
-				<Button text="Cancle" width="20%" press=".oncancledetails" />
+				<Label text="Your Name" required="true"/>
+				<Input id="username" width="40%"/>
+				<Label text="Mobile Number" required="true"/>
+				<Input id="mobile" width="40%"/>
+				<Label text="E-mail ID" required="true"/>
+				<Input id="emailid" width="40%"/>
+				<VBox>
+				<HBox>
+				<Button text="Submit" press=".onSubmitDetails" />
+				<Button text="Cancel" press=".onCancleDetails" />
+				</HBox>
+				</VBox>
 			</f:content>
 		</f:SimpleForm>
 	</Dialog>

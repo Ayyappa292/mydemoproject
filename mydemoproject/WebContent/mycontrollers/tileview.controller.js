@@ -11,55 +11,67 @@ sap.ui.controller("mydemoproject.mycontrollers.tileview", {
 	// onInit: function() {
 	//
 	// },
-	onpress : function() {
-		debugger;
+	/**
+	 * This Function open dialog to take inital user details
+	 */
+	onPress : function() {
 		if (!this.newdialog) {
-			this.newdialog = sap.ui.xmlfragment(
-					"mydemoproject.myfragments.register", this);
+			this.newdialog = sap.ui.xmlfragment("mydemoproject.myfragments.register", this);
 		}
 		this.newdialog.open();
 	},
-	oncancledetails : function() {
-		debugger;
+	
+	/**
+	 * Closes the Dialog
+	 */
+	onCancleDetails : function() {
 		this.newdialog.close();
 	},
-	onsubmitdetails : function() {
-		debugger;
-		let omodel = this.getView().getModel("mymodel");
-		omodel.getProperty("/username");
-		let sname = sap.ui.getCore().byId("username").getValue();
-		let nnumber = sap.ui.getCore().byId("mobile").getValue();
-		let semail = sap.ui.getCore().byId("emailid").getValue();
-		let snamepattern = /^[a-zA-Z\s]*$/; // start of patterns
-		let semailpattern = /^([A-Za-z0-9_\-\.])+\@([gmail|GMAIL])+\.(com)$/;
-		let nnumberpattern = /^[0-9]{10}$/;
-		if (snamepattern.test(sname)) // start of pattern checking
+	/**
+	 * Validation of User Details in the Dialog
+	 */
+	onSubmitDetails : function() {
+	
+		let oModel = this.getView().getModel("mymodel");
+		oModel.getProperty("/username");
+		let sName = sap.ui.getCore().byId("username").getValue();
+		let nNumber = sap.ui.getCore().byId("mobile").getValue();
+		let sEmail = sap.ui.getCore().byId("emailid").getValue();
+		let sNamePattern = /^[a-zA-Z\s]{3,15}$/; // start of patterns
+		let sEmailPattern = /^([A-Za-z0-9_\-\.])+\@([gmail|GMAIL])+\.(com)$/;
+		let nNumberPattern = /^[0-9]{10}$/;
+		if (sNamePattern.test(sName)) // start of pattern checking
 		{
-			sap.ui.getCore().byId("username").setValueState(
-					sap.ui.core.ValueState.None);
+			sap.ui.getCore().byId("username").setValueState(sap.ui.core.ValueState.None);
 		} else {
-			sap.ui.getCore().byId("username").setValueState(
-					sap.ui.core.ValueState.Error);
+			sap.ui.getCore().byId("username").setValueState(sap.ui.core.ValueState.Error);
 		}
-		if (semailpattern.test(semail)) {
-			sap.ui.getCore().byId("emailid").setValueState(
-					sap.ui.core.ValueState.None);
+		if (sEmailPattern.test(sEmail)) 
+		{
+			sap.ui.getCore().byId("emailid").setValueState(sap.ui.core.ValueState.None);
 		} else {
-			sap.ui.getCore().byId("emailid").setValueState(
-					sap.ui.core.ValueState.Error);
+			sap.ui.getCore().byId("emailid").setValueState(sap.ui.core.ValueState.Error);
 		}
-		if (nnumberpattern.test(nnumber)) {
-			sap.ui.getCore().byId("mobile").setValueState(
-					sap.ui.core.ValueState.None);
-			omodel.setProperty("/username", sname);
+		if (nNumberPattern.test(nNumber))
+		{
+			sap.ui.getCore().byId("mobile").setValueState(sap.ui.core.ValueState.None);
+			oModel.setProperty("/username", sName);
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("secondview");
-		} else {
-			sap.ui.getCore().byId("mobile").setValueState(
-					sap.ui.core.ValueState.Error);
+			oRouter.navTo("mainview");
+		} else 
+		{
+			sap.ui.getCore().byId("mobile").setValueState(sap.ui.core.ValueState.Error);
 		}
+	},
+	/**
+	 * navigates to Admin tile
+	 */
+	onAdmin : function(){
+		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		 oRouter.navTo("myadmin");
 	}
 
+	
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's
  * View is re-rendered (NOT before the first rendering! onInit() is used for

@@ -1,6 +1,5 @@
 {
 	"sap.app": {
-		"version": "1.1.0",
 		"id": "mydemoproject",
 		"type": "application",
 		"applicationVersion": {
@@ -8,16 +7,12 @@
 		}
 	},
 	"sap.ui": {
-		"_version": "1.1.0",
 		"technology": "UI5",
 		"deviceTypes": {
 			"desktop": true,
 			"tablet": true,
-			"phone": true
-		},
-		"supportedThemes": [
-			"sap_bluecrystal"
-		]
+			"phone": false
+		}
 	},
 	"sap.ui5": {
 		"rootView": "mydemoproject.myviews.tileview",
@@ -41,7 +36,7 @@
 				"viewType": "XML",
 				"async": true,
 				"viewPath": "mydemoproject.myviews",
-				"controlId": "App",
+				"controlId": ["App"],
 				"controlAggregation": "pages"
 			},
 			"routes": [
@@ -51,33 +46,41 @@
 					"target": "firstview"
 				},
 				{
-					"pattern": "secondview",
-					"name": "secondview",
-					"target": "secondview"
+					"pattern": "mainview",
+					"name": "mainview",
+					"target": "mainview"
 				},
 				{
 					"pattern": "cartview",
-					"name": "cartview",
+					"name": "mycart",
 					"target": "cartview"
 				},
 				{
 					"pattern": "paymentview",
 					"name": "paymentview",
 					"target": "paymentview"
+				},
+				{
+				"pattern":"billdetails",
+				"name":"mybilldetails",
+				"target":"mybilldetails"
+				},
+				{
+				"pattern":"Admin",
+				"name":"myadmin",
+				"target":"myadmin"
 				}
 			],
 			"targets": {
 				"firstview": {
 					"viewName": "tileview",
 					"viewType": "XML",
-					"viewId": "view1",
-					"viewLevel": 1
+					"viewId": "view1"
 				},
-				"secondview": {
+				"mainview": {
 					"viewName": "mainview",
 					"viewType": "XML",
-					"viewId": "view2",
-					"viewLevel": 2
+					"viewId":"view2"
 				},
 				"cartview": {
 					"viewName": "cart",
@@ -87,7 +90,15 @@
 				"paymentview": {
 					"viewName": "payment",
 					"viewType": "XML",
-					"ViewId": "view4"
+					"viewId": "view4"
+				},
+				"mybilldetails":{
+				"viewName":"recieptview",
+				"viewType":"XML"
+				},
+				"myadmin":{
+				"viewName":"admin",
+				"viewType":"XML"
 				}
 			}
 		},

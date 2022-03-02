@@ -8,13 +8,19 @@ sap.ui.define([
 	  return Controller.extend("mydemoproject.mycontrollers.mainview",{
 /*
  * onInit: function() { },
- */  
+ */
+		  
+		  onInit(){
+			debugger;  
+		  },
+		  /**
+			 * For Searching a Category
+			 */
 	onSearch: function (oEvent) {
-		debugger;
-		var aFilters = [];
-		var sQuery = oEvent.getSource().getValue();
+		let aFilters = [];
+		let sQuery = oEvent.getSource().getValue();
 		if (sQuery && sQuery.length > 0) {
-			var filter = new Filter("name", FilterOperator.Contains, sQuery);
+			let filter = new Filter("name", FilterOperator.Contains, sQuery);
 			aFilters.push(filter);
 		}
 		var oList = this.byId("listid");
@@ -23,74 +29,100 @@ sap.ui.define([
 	},
 	getSplitAppObj : function() {
 		var result = this.byId("splitapp");
-		if (!result) {
+		if (!result) 
+		{
 			Log.info("SplitApp object can't be found");
 		}
 		return result;
 	},
-	onselectChange : function(oEvent) {
-		debugger;
+	
+	/**
+	 * Category Selection change Function
+	 */
+	onSelectChange : function(oEvent) {
 		let list = this.getView().byId("listid").getSelectedItem();
-		let oobj = list.getBindingContext("mymodel").getObject();
-		let selected = {};
-		let oname = this.getView().getModel("mymodel").getProperty("/details");
-		let otile = oname[oobj.name];
-		let xy = this.getView().getModel("mymodel").getProperty("/adetails");
-		xy = [];
-		this.getView().getModel("mymodel").setProperty("/adetails",xy);
-		xy=[...otile];
-		this.getView().getModel("mymodel").setProperty("/adetails",xy);
+		let oObj = list.getBindingContext("mymodel").getObject();
+		let oName = this.getView().getModel("mymodel").getProperty("/details");
+		let oItem = oName[oObj.name];
+		let aEmpty = this.getView().getModel("mymodel").getProperty("/adetails");
+		aEmpty=[...oItem];
+		this.getView().getModel("mymodel").setProperty("/adetails",aEmpty);
 		var sToPageId = oEvent.getParameter("listItem")
 		.getCustomData()[0].getValue();
 		this.getSplitAppObj()
 		.toDetail(this.createId(sToPageId));
-		},
-		onaddtocart: function(oEvent){
-			debugger;
-			var omodel = this.getView().getModel("mymodel");
-			let odata = omodel.getProperty("/cart");
-			let sname =oEvent.getSource().getBindingContext("mymodel").getObject("productname");
-			let simg =oEvent.getSource().getBindingContext("mymodel").getObject("productimage");
-			let np =oEvent.getSource().getBindingContext("mymodel").getObject("price");
-			odata.push({
-				productname:sname,
-				productimage:simg,
-				price:np
+			},
+		
+		/**
+		 * On Item Add to cart Function
+		 */
+		onAddToCart: function(oEvent){
+			let oModel = this.getView().getModel("mymodel");
+			let oData = oModel.getProperty("/productdetails");// [cart]
+			let sName =oEvent.getSource().getBindingContext("mymodel").getObject("productname");
+			let sImg =oEvent.getSource().getBindingContext("mymodel").getObject("productimage");
+			let nPrice =oEvent.getSource().getBindingContext("mymodel").getObject("price");
+			oData.push({
+				productname:sName,
+				productimage:sImg,
+				price:nPrice
 			});
-			omodel.setProperty("/cart",odata);
+			oModel.setProperty("/cart",oData);
 			MessageToast.show("Item Added Successfully");
-			let oldprice=omodel.getProperty("/cartvalue");
-			 let na=parseInt(oldprice);
-			 let nb=parseInt(np);
-			 let newprice = na+nb;
-			 omodel.setProperty("/cartvalue",newprice);
-			 omodel.getProperty("/noitems");
-			 let olen=odata.length;
-			 omodel.setProperty("/noitems",olen);
+			let oOldPrice=oModel.getProperty("/cartvalue");
+			 let nParse1=parseInt(oOldPrice);
+			 let nParse2=parseInt(nPrice);
+			 let nNewprice = nParse1+nParse2;
+			 oModel.setProperty("/cartvalue",nNewprice);
+			 oModel.getProperty("/noitems");
+			 let oLen=oData.length;
+			 oModel.setProperty("/noitems",oLen);
 			
 		},
-		oncart : function(){
-			debugger;
-			var omodel = this.getView().getModel("mymodel");
-			let odata = omodel.getProperty("/cart");
-			if(odata.length)
+		/**
+		 * This Function Navigates to The Cart Page
+		 */
+		onCart : function(){
+			let oModel = this.getView().getModel("mymodel");
+			let oData = oModel.getProperty("/cart");
+			if(oData.length)
 				{
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			 oRouter.navTo("cartview");
+			 oRouter.navTo("mycart");
 				}
 			else
 				{
 				alert("Add at least one Product to View Cart");
 				}
 		},
-		onitempress : function(oEvent){
+		/**
+		 * For Item Details
+		 */
+		onItemPress: function(oEvent){
 			debugger;
-			// let list = this.getView().byId("id2").getSelectedItem();
-			var sToPageId = oEvent.getParameter("id2")
-			.getCustomData()[0].getValue();
-			this.getSplitAppObj()
-			.toDetail(this.createId(sToPageId));
+			let oModel = this.getView().getModel("mymodel");
+			let oData = oModel.getProperty("/details");
+			let oName = oEvent.getSource().getSelectedItem().getBindingContext("mymodel").getObject();
+			// let oDetails= oData.find(element=>element.productname == oName);
+			let aArray =  oModel.getProperty("/productdetails");
+			aArray=[];
+			aArray.push(oName);
+			oModel.setProperty("/productdetails",aArray);
+			oModel.getProperty("/flexcolumnlayout");
+			let oLayout = "TwoColumnsMidExpanded";
+			oModel.setProperty("/flexcolumnlayout",oLayout);
+			console.log(oModel.getProperty("/productdetails"));
 		},
+		/**
+		 * Handling close mid column
+		 */
+		
+		onHandleClose : function(){
+			let oModel = this.getView().getModel("mymodel");
+			oModel.getProperty("/flexcolumnlayout");
+			let oLayout = "OneColumn";
+			oModel.setProperty("/flexcolumnlayout",oLayout);
+		}
 		
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's

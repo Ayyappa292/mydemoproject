@@ -4,7 +4,7 @@
 	controllerName="mydemoproject.mycontrollers.payment"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Payment Page" showNavButton="true"
-		navButtonPress=".gotoapp">
+		navButtonPress=".onGoToCart">
 		<content>
 			<f:SimpleForm>
 				<f:content>
@@ -23,21 +23,22 @@
 				<f:content>
 					<core:Title text="Billing Information" />
 					<Label text="Name" />
-					<Input fieldGroupIds="Billing Information" />
+					<Input fieldGroupIds="Billing Information" id="name" />
 					<Label text="Street/No." />
-					<Input fieldGroupIds="Billing Information" />
-					<Input fieldGroupIds="Billing Information">
+					<Input fieldGroupIds="Billing Information" id="streetname" />
+					<Input fieldGroupIds="Billing Information" id="streetno">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
 					<Label text="ZIP Code/City" />
-					<Input fieldGroupIds="Billing Information" type="Number">
+					<Input fieldGroupIds="Billing Information" type="Number"
+						id="zipcode">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
-					<Input fieldGroupIds="Billing Information" />
+					<Input fieldGroupIds="Billing Information" id="city" />
 					<Label text="Country" />
 					<Select fieldGroupIds="Billing Information" width="100%">
 						<items>
@@ -50,9 +51,9 @@
 					<Input fieldGroupIds="Discount Code"
 						placeholder="Enter your discout code here..." />
 					<core:Title text="Credit Card" />
-					<Label text="Vendor" />
+					<Label text="Card Type" />
 					<ComboBox fieldGroupIds="Credit Card" width="100%"
-						placeholder="Choose your card vendor...">
+						placeholder="Choose your Card Type">
 						<items>
 							<core:Item text="Mastercard" />
 							<core:Item text="Visa" />
@@ -60,45 +61,14 @@
 						</items>
 					</ComboBox>
 					<Label text="Credit Card Number" />
-					<Input fieldGroupIds="Credit Card" type="Number" />
-					<Label text="Expiry Date" />
-					<ComboBox fieldGroupIds="Credit Card">
-						<items>
-							<core:Item text="01" />
-							<core:Item text="02" />
-							<core:Item text="03" />
-							<core:Item text="04" />
-							<core:Item text="05" />
-							<core:Item text="06" />
-							<core:Item text="06" />
-							<core:Item text="07" />
-							<core:Item text="08" />
-							<core:Item text="09" />
-							<core:Item text="10" />
-							<core:Item text="11" />
-							<core:Item text="12" />
-						</items>
-					</ComboBox>
-					<ComboBox fieldGroupIds="Credit Card">
-						<items>
-							<core:Item text="2015" />
-							<core:Item text="2016" />
-							<core:Item text="2017" />
-							<core:Item text="2018" />
-							<core:Item text="2019" />
-							<core:Item text="2020" />
-							<core:Item text="2021" />
-							<core:Item text="2022" />
-							<core:Item text="2023" />
-							<core:Item text="2024" />
-							<core:Item text="2025" />
-							<core:Item text="2026" />
-						</items>
-					</ComboBox>
+					<Input fieldGroupIds="Credit Card" type="Number" id="cardno"/>
+					<Label text="Expiry Date" labelFor="date" />
+					<DatePicker id="date" placeholder="Enter Date"
+						class="sapUiSmallMarginBottom" />
 					<Label text="CVV" />
-					<Input fieldGroupIds="Credit Card" type="Number" />
+					<Input fieldGroupIds="Credit Card" type="Number" id="cvv" width="10%"/>
 					<Label />
-					<Button text="Submit" width="20%" press=".onsubmitpayment" />
+					<Button text="Submit" width="20%" press=".onSubmitPayment" />
 				</f:content>
 			</f:SimpleForm>
 		</content>

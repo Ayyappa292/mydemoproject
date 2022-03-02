@@ -11,55 +11,49 @@ sap.ui.controller("mydemoproject.mycontrollers.cart", {
 	// onInit: function() {
 	//
 	// },
-	gotoapp : function() {
-		debugger;
+	/**
+	Back Navigation From Cart Page to Main Page
+	**/
+	onGoToApp : function() {
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-		oRouter.navTo("secondview");
+		oRouter.navTo("mainview");
 		this.getView().byId("cartvalue");
 	},
-	onpayment : function() {
-		debugger;
-		var omodel = this.getView().getModel("mymodel");
-		let odata = omodel.getProperty("/cart");
-		if (odata.length) {
+	
+	/**
+	 To Navigate to Payment Page
+	 **/
+	onPayment : function() {
+		var oModel = this.getView().getModel("mymodel");
+		let oData = oModel.getProperty("/cart");
+		if (oData.length) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("paymentview");
 		} else {
 			alert("add products to cart to proceed");
 		}
 	},
-	oncancelitem : function(oEvent) {
-		debugger;
-		/*
-		 * var omodel= this.getView().getModel("mymodel"); var oTable =
-		 * this.getView().byId("carttable2"); var aSelectedItems =
-		 * oTable.getSelectedItems(); let op
-		 * =oEvent.getSource().getBindingContext("mymodel").getObject("price");
-		 * if(aSelectedItems.length==0) { alert("select a product to delete"); }
-		 * else { for(var i=0; i<aSelectedItems.length; i++){
-		 * oTable.removeItem(aSelectedItems[i]) sap.m.MessageToast.show("Item
-		 * Removed"); } let oldprice=omodel.getProperty("/cartvalue"); let
-		 * na=parseInt(oldprice); let nb=parseInt(op); let newprice = na-nb;
-		 * omodel.setProperty("/cartvalue",newprice); }
-		 */
-		let np = oEvent.getSource().getBindingContext("mymodel").getObject(
-				"price");
-		var deleteRecord = oEvent.getSource().getBindingContext("mymodel")
-				.getObject();
-		var omodel = this.getView().getModel("mymodel");
-		var odata = omodel.getProperty("/cart");
-		for (var i = 0; i < odata.length; i++) {
-			if (odata[i] == deleteRecord) {
-				odata.splice(i, 1);
-				omodel.setProperty("/cart", odata);
-				let oldprice = omodel.getProperty("/cartvalue");
-				let na = parseInt(oldprice);
-				let nb = parseInt(np);
-				let newprice = na - nb;
-				omodel.setProperty("/cartvalue", newprice);
-				omodel.getProperty("/noitems");
-				let olen = odata.length;
-				omodel.setProperty("/noitems", olen);
+	/**
+	 * For Deletion or Cancelation of an Item from the Cart
+	 */
+	onCancelItem : function(oEvent) {
+		let nPrice = oEvent.getSource().getBindingContext("mymodel").getObject("price");
+		let oDeleteRecord = oEvent.getSource().getBindingContext("mymodel").getObject();
+		let oModel = this.getView().getModel("mymodel");
+		let oData = oModel.getProperty("/cart");
+		for (var i = 0; i < oData.length; i++) {
+			if (oData[i] == oDeleteRecord) {
+				oData.splice(i, 1);
+				oModel.setProperty("/cart", oData);
+				let oOldPrice = oModel.getProperty("/cartvalue");
+				let nParse1 = parseInt(oOldPrice);
+				let nParse2 = parseInt(nPrice);
+				let nNewPrice = nParse1 - nParse2;
+				oModel.setProperty("/cartvalue", nNewPrice);
+				oModel.getProperty("/noitems");
+				let oLen = oData.length;
+				oModel.setProperty("/noitems", oLen);
+				sap.m.MessageToast.show("ItemRemoved");
 			}
 		}
 	}

@@ -7,12 +7,18 @@
 			<FlexBox height="400px" alignItems="Center"
 				justifyContent="Center">
 				<GenericTile header="Products Application"
-					press=".onpress">
+					press=".onPress">
 					<TileContent footer="Browse Products">
 						<ImageContent src="sap-icon://retail-store" />
 					</TileContent>
 					<TileContent>
 						<ImageContent src="sap-icon://retail-store-manager" />
+					</TileContent>
+				</GenericTile>
+				<GenericTile header="Administrative Department"
+					press=".onAdmin">
+					<TileContent footer="Restricted Access">
+						<ImageContent src="sap-icon://key-user-settings" />
 					</TileContent>
 				</GenericTile>
 			</FlexBox>
