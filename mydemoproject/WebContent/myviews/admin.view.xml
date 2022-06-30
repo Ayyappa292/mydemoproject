@@ -1,34 +1,119 @@
-<mvc:View controllerName="mydemoproject.mycontrollers.admin" xmlns="sap.m"
-    xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout"
-    xmlns:mvc="sap.ui.core.mvc" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-    xmlns:viz.data="sap.viz.ui5.data" height="100%">
-    <layout:FixFlex id='chartFixFlex' minFlexSize="250">
-        <!--Below is the setting panel -->
-      
-        <layout:flexContent>
-            <viz:Popover id="idPopOver"></viz:Popover>
-            <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
-                height='100%' width="100%" vizType='pie'>
-                <viz:dataset>
-                    <viz.data:FlattenedDataset data="{/milk}">
-                        <viz.data:dimensions>
-                            <viz.data:DimensionDefinition name="Store Name"
-                                value="10" />
-                        </viz.data:dimensions>
-                        <viz.data:measures>
-                            <viz.data:MeasureDefinition name="Revenue"
-                                value="20" />
-                        </viz.data:measures>
-                    </viz.data:FlattenedDataset>
-                </viz:dataset>
+<!-- <mvc:View controllerName="mydemoproject.mycontrollers.admin"
+	xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:layout="sap.ui.layout" xmlns:m="sap.suite.ui.microchart"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" height="100%">
+	<Page title="Admin Page">
+		<FlexBox width="20rem" height="10rem" alignItems="Center"
+			justifyContent="Center">
+			<m:InteractiveBarChart labelWidth="25%"
+				selectionChanged="selectionChanged" press="press">
+				<m:bars>
+					<m:InteractiveBarChartBar
+						label="Product 1" value="10" />
+					<m:InteractiveBarChartBar
+						label="Product 2" value="20" />
+					<m:InteractiveBarChartBar
+						label="Product 3" value="70" />
+				</m:bars>
+			</m:InteractiveBarChart>
+		</FlexBox>
+		<FlexBox width="20rem" height="400px" alignItems="Center"
+			justifyContent="Center">
+			<items>
+				<m:InteractiveDonutChart
+					selectionChanged="onSelectionChanged">
+					<m:segments>
+						<m:InteractiveDonutChartSegment
+							label="Implementation Phase" value="40.0" displayedValue="40.0%" />
+						<m:InteractiveDonutChartSegment
+							label="Design Phase" value="21.5" displayedValue="21.5%" />
+						<m:InteractiveDonutChartSegment
+							label="Test Phase" value="38.5" displayedValue="38.5%" />
+					</m:segments>
+				</m:InteractiveDonutChart>
+			</items>
+		</FlexBox>
+	</Page>
+</mvc:View> -->
 
-                <viz:feeds>
-                    <viz.feeds:FeedItem uid="size" type="Measure"
-                        values="Revenue" />
-                    <viz.feeds:FeedItem uid="color" type="Dimension"
-                        values="Store Name" />
-                </viz:feeds>
-            </viz:VizFrame>
-        </layout:flexContent>
-    </layout:FixFlex>
+<mvc:View
+		controllerName="mydemoproject.mycontrollers.admin"
+		xmlns="sap.suite.ui.commons.networkgraph"
+		xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:m="sap.m"
+		xmlns:l="sap.ui.layout"
+		height="100%">
+	<l:FixFlex vertical="true" fixContentSize="5%">
+		<l:fixContent>
+			<m:HBox width="100%" renderType="Bare">
+				<m:Button text="Free Range Marvel" press="freeRangeMarvel" class="sapUiTinyMargin"/>
+				<m:Button text="Fixed Avengers Timeline" press="fixedAvengersTimeline" class="sapUiTinyMargin"/>
+				<m:Button text="Thor &amp; Captain Standoff" press="thorCaptainStandoff" class="sapUiTinyMargin"/>
+				<m:Button text="Arc of Secondary Heroes" press="arcOfSecondaryHeroes" class="sapUiTinyMargin"/>
+			</m:HBox>
+			<!--<m:HBox width="100%" renderType="Bare">-->
+				<!--<m:Slider width="50%" value="{settings>/optimalDistanceConstant}" min="0.2" max="0.4" step="0.01" enableTickmarks="true"/>-->
+			<!--</m:HBox>-->
+		</l:fixContent>
+		<l:flexContent>
+			<l:FixFlex vertical="false" fixContentSize="100%">
+				<l:fixContent>
+					<Graph  enableWheelZoom="false"
+							nodes="{/nodes}"
+							lines="{/lines}"
+							groups="{/groups}"
+							id="graph">
+						<layoutData>
+							<m:FlexItemData minWidth="75%" maxWidth="75%"/>
+						</layoutData>
+						<layoutAlgorithm>
+							<layout:ForceDirectedLayout
+									optimalDistanceConstant="0.26"
+									maxIterations="{settings>/maxIterations}"
+									maxTime="{settings>/maxTime}"
+									initialTemperature="{settings>/initialTemperature}"
+									coolDownStep="{settings>/coolDownStep}">
+							</layout:ForceDirectedLayout>
+						</layoutAlgorithm>
+						<nodes>
+							<Node
+									height="{settings>/height}"
+									key="{key}"
+									title="{title}"
+									icon="{icon}"
+									group="{group}"
+									attributes="{path:'attributes', templateShareable:true}"
+									shape="{shape}"
+									status="{status}"
+									x="{x}"
+									y="{y}">
+								<attributes>
+									<ElementAttribute
+											label="{label}"
+											value="{value}"/>
+								</attributes>
+							</Node>
+						</nodes>
+						<lines>
+							<Line
+									from="{from}"
+									to="{to}"
+									status="{status}"
+							>
+							</Line>
+						</lines>
+						<groups>
+							<Group
+									key="{key}"
+									title="{title}">
+							</Group>
+						</groups>
+					</Graph>
+				</l:fixContent>
+			</l:FixFlex>
+		</l:flexContent>
+	</l:FixFlex>
 </mvc:View>

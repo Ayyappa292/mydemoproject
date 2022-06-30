@@ -7,16 +7,19 @@
 	<Page id="cartpage" title="MyCart" showNavButton="true"
 		navButtonPress=".onGoToApp">
 		<content>
-			<Table items="{mymodel>/cart}" id="carttable2">
+			<Table items="{myModel>/cart}" id="carttable2" >
 				<columns>
 					<Column>
-						<Text text="Product Name" />
+						<Text text="Product Id" />
 					</Column>
 					<Column>
-						<Text text="Prodcut Image" />
+						<Text text="Prodcut Name" />
 					</Column>
 					<Column>
-						<Text text="Price" />
+						<Text text="Supplier" />
+					</Column>
+					<Column>
+						<Text text="Price"/>
 					</Column>
 					<Column>
 					</Column>
@@ -24,13 +27,10 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Text text="{mymodel>productname}" />
-							<HBox>
-								<Image src="{mymodel>productimage}" decorative="false"
-									width="170px" densityAware="false">
-								</Image>
-							</HBox>
-							<Text text="{mymodel>price}" />
+							<Text text="{myModel>ProductId}" />
+							<Text text="{myModel>ProductName}"/>
+							<Text text="{myModel>ProductSupplier}"/>
+							<Text text="{myModel>ProductPrice}"/>
 							<HBox>
 								<Button icon="sap-icon://delete" press=".onCancelItem" />
 							</HBox>
@@ -38,13 +38,13 @@
 					</ColumnListItem>
 				</items>
 			</Table>
-
+	
 		</content>
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer />
 				<Label text="Total Price:" />
-				<Text id="cartvalue" width="10%" text="{mymodel>/cartvalue}$" />
+				<Text id="cartvalue" width="10%" text="{myModel>/cartvalue}$" />
 				<Button text="Procced to Payment" press=".onPayment" />
 			</Toolbar>
 		</footer>

@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Popover  title="User Information"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom">
+		<f:SimpleForm layout="ResponsiveGridLayout">
+			<f:content>
+				<Avatar
+					src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+					displaySize="XS" />
+				<Label text="Name" />
+				<Text text="{myModel>/currentUser/CustName}" />
+				<Label text="email id " />
+				<Text text="{myModel>/currentUser/CustEmail}" />
+				<Label text="Mobile" />
+				<Text text="{myModel>/currentUser/CustPhoneNo}" />
+				<VBox>
+					<HBox>
+						<Button  text="Logout"
+							press=".handlelogoutPress" />
+					</HBox>
+				</VBox>
+			</f:content>
+		</f:SimpleForm>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,30 @@
+<core:View xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	controllerName="mydemoproject.mycontrollers.loginview"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Login">
+		<content>
+			<FlexBox height="600px" alignItems="Center"
+				justifyContent="Center">
+				<f:SimpleForm layout="ResponsiveGridLayout">
+					<f:content>
+
+						<Label text="UserName" required="true" />
+						<Input id="sUserName" />
+
+						<Label text="Password" required="true" />
+						<Input id="sPassword" type="Password" />
+
+						<Label />
+						<l:HorizontalLayout>
+							<Button text="Login" width="100%" press=".onlogin" />
+							<Button text="Register" width="100%" press=".onRegister" />
+						</l:HorizontalLayout>
+					</f:content>
+
+				</f:SimpleForm>
+			</FlexBox>
+		</content>
+	</Page>
+</core:View>

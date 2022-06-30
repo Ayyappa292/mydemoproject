@@ -13,19 +13,21 @@
 				<f:content>
 					<core:Title text="Order Details" />
 					<Label text="Items" />
-					<List items="{mymodel>/cart}">
-						<StandardListItem title="{mymodel>productname}" />
+					<List items="{myModel>/cart}">
+						<StandardListItem title="{myModel>productname}" />
 					</List>
 					<Label text="Total No of Items" />
-					<Text text="{mymodel>/noitems}" />
+					<Text text="{myModel>/noitems}" />
 					<Label text="Total Amount" />
-					<Text text="{mymodel>/cartvalue}$" />
+					<Text text="{myModel>/cartvalue}$" />
 					<Label text="Transtation Id"/>
-					<Text text="57829123"/>
+					<Text text="{myModel>/transactionid}"/>
+					<Label text="Date and Time of Payment"/>
+					<Text text="" id="date"/>
 					<Label text="Expected Date of Delivery"/>
 					<Text text="10th March(Thursday)"/>
 					<Label text="One Time Password"/>
-					<Text text="2453 (Note:-Only Share during the time of Delivery)"/>
+					<Text text="{myModel>/otpno} (Note:-Only Share during the time of Delivery)"/>
 				</f:content>
 			</f:SimpleForm>
 		</content>

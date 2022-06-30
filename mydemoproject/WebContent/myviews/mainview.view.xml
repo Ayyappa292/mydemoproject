@@ -5,202 +5,251 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
 	controllerName="mydemoproject.mycontrollers.mainview"
 	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true">
-	<Page title="Welcome {mymodel>/username}">
-		<content>
-			<SplitApp id="splitapp" initialDetail="detail"
-				initialMaster="master">
-				<detailPages>
-					<Page id="detail">
-						<content>
-							<FlexBox alignContent="Center" class="hello">
+	<Page showHeader="false" >
+	<tnt:ToolHeader>
+<core:Icon src="sap-icon://sap-ui5" size="40px"/>
+		<Text text="Welcome {myModel>/currentUser/CustName}" wrapping="false" />
+		<ToolbarSpacer />
+				 <Button press="onCart" icon="sap-icon://cart"
+						type="Transparent" text="My Cart">
+						<customData>
+							<BadgeCustomData key="badge"
+								value="{myModel>/noitems}" visible="true" />
+						</customData>
+					</Button>
+		<Button icon="sap-icon://customer-history" type="Transparent" text="My Orders" press=".onMyOrders"/>
+		<Button icon="sap-icon://bell" type="Transparent" press=".onNotificationPress"/>
+		<Avatar src="test-resources/sap/tnt/images/Woman_avatar_01.png" displaySize="XS" press=".onAvatarPressed" id="profile"/>
+	</tnt:ToolHeader>
+	<SplitApp id="splitapp" initialDetail="detail"
+		initialMaster="master">
+		<detailPages>
+			<Page id="detail">
+				<content>
+					<FlexBox alignContent="Center" class="hello">
+						<items>
+							<core:Icon src="sap-icon://detail-view" size="200px" />
+						</items>
+					</FlexBox>
+					<Text text="Select on a Category to display products"
+						class="hello1" />
+				</content>
+			</Page>
+			<Page id="productdetail" title="Products"
+				backgroundDesign="Solid">
+				<fn:FlexibleColumnLayout
+					layout="{myModel>/flexcolumnlayout}" visible="true" id="flexcolumn">
+					<fn:beginColumnPages>
+						<ScrollContainer height="100%" width="100%"
+							vertical="true" focusable="true">
+							<Table items="{myModel>/productdata}" id="carttable"
+								mode="SingleSelectMaster" itemPress=".onItemPress">
+								<columns>
+									<Column>
+										<Text text="Product Name" />
+									</Column>
+									<Column>
+										<Text text="Prodcut Image" />
+									</Column>
+									<Column>
+										<Text text="Price" />
+									</Column>
+									<Column>
+									</Column>
+								</columns>
 								<items>
-									<core:Icon src="sap-icon://detail-view" size="200px" />
+									<ColumnListItem type="Navigation">
+										<cells>
+											<Text text="{myModel>ProductName}" />
+											<Image src="{myModel>ProductImage}" decorative="false"
+												width="170px" densityAware="false" />
+											<Text text="{myModel>ProductPrice}" />
+											<VBox>
+												<Button icon="sap-icon://cart-3" press=".onAddToCart" />
+												<!-- <StepInput id="CurrentValue"
+													value="0" width="80px" stepMode="AdditionAndSubtraction"
+													change="currentChangeHandler" /> -->
+													<!-- <HBox>
+														<Button icon="sap-icon://sys-add" width="20px" press=".onAddToCart"/> 
+													<Text text="0" width="20%"/>
+													<Button icon="sap-icon://sys-minus" width="20px" press=".onCancelItem"/>
+													</HBox> -->
+											</VBox>
+										</cells>
+									</ColumnListItem>
 								</items>
-							</FlexBox>
-							<Text text="Select on a Category to display products"
-								class="hello1" />
-						</content>
-					</Page>
-					<Page id="productdetail" title="Products"
-						backgroundDesign="Solid">
-						<tnt:ToolHeader active="true">
-							<Text text="Welcome {mymodel>/username}" />
-							<ToolbarSpacer />
-							<Toolbar>
-							</Toolbar>
-							<Button text="MyCart" icon="sap-icon://cart"
-								type="Transparent" press="onCart" />
-						</tnt:ToolHeader>
-						<fn:FlexibleColumnLayout
-							layout="{mymodel>/flexcolumnlayout}" visible="true"
-							id="flexcolumn">
-							<fn:beginColumnPages>
-								<ScrollContainer height="100%" width="100%"
-									vertical="true" focusable="true">
-									<Table items="{mymodel>/adetails}" id="carttable"
-										mode="SingleSelectMaster" itemPress=".onItemPress">
-										<columns>
-											<Column>
-												<Text text="Product Name" />
-											</Column>
-											<Column>
-												<Text text="Prodcut Image" />
-											</Column>
-											<Column>
-												<Text text="Price" />
-											</Column>
-											<Column>
-											</Column>
-										</columns>
-										<items>
-											<ColumnListItem type="Navigation">
-												<cells>
-													<Text text="{mymodel>productname}" />
-													<HBox>
-														<Image src="{mymodel>productimage}"
-															decorative="false" width="170px" densityAware="false">
-															<detailBox>
-																<LightBox>
-																	<LightBoxItem
-																		imageSrc="{mymodel>productimage}" alt="Beamer" />
-																</LightBox>
-															</detailBox>
-															<layoutData>
-																<FlexItemData growFactor="1"
-																	shrinkFactor="0" />
-															</layoutData>
-														</Image>
-													</HBox>
-													<Text text="{mymodel>price}" />
-													<HBox>
-														<Button icon="sap-icon://cart-3"
-															press=".onAddToCart" />
-													</HBox>
-												</cells>
-											</ColumnListItem>
-										</items>
-									</Table>
-								</ScrollContainer>
-							</fn:beginColumnPages>
-							<fn:midColumnPages visible="false">
-								<u:ObjectPageLayout>
-									<u:headerTitle>
-										<u:ObjectPageDynamicHeaderTitle>
-											<u:heading>
-												<Title text="{mymodel>/productdetails/0/productname}"
-													id="ProductName" />
-											</u:heading>
-											<u:navigationActions>
-												<OverflowToolbarButton
-													type="Transparent" icon="sap-icon://decline"
-													press=".onHandleClose" tooltip="Close middle column" />
-											</u:navigationActions>
-										</u:ObjectPageDynamicHeaderTitle>
-									</u:headerTitle>
-									<u:headerContent>
-										<FlexBox wrap="Wrap" fitContainer="true"
-											alignItems="Stretch">
-											<fn:Avatar
-												src="{mymodel>/productdetails/0/productimage}"
-												displaySize="L" displayShape="Square"
-												class="sapUiTinyMarginEnd">
-											</fn:Avatar>
-											<VBox justifyContent="Center"
-												class="sapUiSmallMarginEnd">
-												<Label text="Main Category" />
-												<Text
-													text="{mymodel>/productdetails/0/productcategory}" />
-											</VBox>
-											<VBox justifyContent="Center"
-												class="sapUiSmallMarginEnd">
-												<Label text="Price" />
-												<ObjectNumber
-													number="{mymodel>/productdetails/0/price}$"
-													emphasized="false" />
-											</VBox>
-										</FlexBox>
-									</u:headerContent>
-									<u:sections>
-										<u:ObjectPageSection
-											title="General Information">
-											<u:subSections>
-												<u:ObjectPageSubSection>
-													<u:blocks>
-														<f:SimpleForm maxContainerCols="2"
-															editable="false" layout="ResponsiveGridLayout"
-															labelSpanL="12" labelSpanM="12" emptySpanL="0"
-															emptySpanM="0" columnsL="1" columnsM="1">
-															<f:content>
-																<Label text="Product ID" />
-																<Text text="{mymodel>/productdetails/0/productid}" />
-																<Label text="Description" />
-																<Text
-																	text="{mymodel>/productdetails/0/productdescription}" />
-																<Label text="Supplier" />
-																<Text
-																	text="{mymodel>/productdetails/0/productsupplier}" />
-															</f:content>
-														</f:SimpleForm>
-													</u:blocks>
-												</u:ObjectPageSubSection>
-											</u:subSections>
-										</u:ObjectPageSection>
-										<u:ObjectPageSection title="Review">
-											<u:subSections>
-												<u:ObjectPageSubSection>
-													<u:blocks>
-														<f:SimpleForm maxContainerCols="2"
-															editable="false" layout="ResponsiveGridLayout"
-															labelSpanL="12" labelSpanM="12" emptySpanL="0"
-															emptySpanM="0" columnsL="1" columnsM="1">
-															<f:content>
-																<Label text="Product Reviews" />
-																<VBox>
-																	<core:Icon src="sap-icon://customer"
-																		size="35px" />
-																	<Text
-																		text="{mymodel>/productdetails/0/productreview1}" />
-																</VBox>
-																<Label />
-																<VBox>
-																	<core:Icon src="sap-icon://customer"
-																		size="35px" />
-																	<Text
-																		text="{mymodel>/productdetails/0/productreview2}" />
-																</VBox>
-																<Label text="Overall Rating" />
-																<RatingIndicator maxValue="5"
-																	class="sapUiSmallMarginBottom" value="4"
-																	iconSize="32px" tooltip="Rating Tooltip" />
-																<Label />
-																<HBox>
-																	<ToggleButton icon="sap-icon://thumb-up"
-																		width="20%" />
-																	<ToggleButton icon="sap-icon://thumb-down"
-																		width="20%" />
-																</HBox>
-															</f:content>
-														</f:SimpleForm>
-													</u:blocks>
-												</u:ObjectPageSubSection>
-											</u:subSections>
-										</u:ObjectPageSection>
-									</u:sections>
-								</u:ObjectPageLayout>
-							</fn:midColumnPages>
-						</fn:FlexibleColumnLayout>
-					</Page>
-				</detailPages>
-				<masterPages>
-					<Page id="master" title="Categories" backgroundDesign="List">
-						<List items="{mymodel>/categories}" mode="SingleSelectMaster"
-							selectionChange=".onSelectChange" id="listid">
-							<StandardListItem title="{mymodel>name}"
-								type="Navigation" custom:to="productdetail" id="id1" />
-						</List>
-					</Page>
-				</masterPages>
-			</SplitApp>
-		</content>
-	</Page>
+							</Table>
+						</ScrollContainer>
+					</fn:beginColumnPages>
+					<fn:midColumnPages visible="false">
+						<u:ObjectPageLayout>
+							<u:headerTitle>
+								<u:ObjectPageDynamicHeaderTitle>
+									<u:heading>
+										<Title text="{myModel>/productdetails/0/ProductName}"
+											id="ProductName" />
+									</u:heading>
+									<u:navigationActions>
+										<OverflowToolbarButton
+											type="Transparent" icon="sap-icon://decline"
+											press=".onHandleClose" tooltip="Close middle column" />
+									</u:navigationActions>
+								</u:ObjectPageDynamicHeaderTitle>
+							</u:headerTitle>
+							<u:headerContent>
+								<FlexBox wrap="Wrap" fitContainer="true"
+									alignItems="Stretch">
+									<fn:Avatar
+										src="{myModel>/productdetails/0/ProductImage}" displaySize="L"
+										displayShape="Square" class="sapUiTinyMarginEnd">
+									</fn:Avatar>
+									<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+										<Label text="Category" />
+										<Text text="{myModel>/productdetails/0/CategoryName}" />
+									</VBox>
+									<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+										<Label text="Price" />
+										<ObjectNumber
+											number="{myModel>/productdetails/0/ProductPrice}$"
+											emphasized="false" />
+									</VBox>
+								</FlexBox>
+							</u:headerContent>
+							<u:sections>
+								<u:ObjectPageSection
+									title="Product Information">
+									<u:subSections>
+										<u:ObjectPageSubSection>
+											<u:blocks>
+												<f:SimpleForm maxContainerCols="2"
+													editable="false" layout="ResponsiveGridLayout"
+													labelSpanL="12" labelSpanM="12" emptySpanL="0"
+													emptySpanM="0" columnsL="1" columnsM="1">
+													<f:content>
+														<Label text="Product ID" />
+														<Text text="{myModel>/productdetails/0/ProductId}" />
+														<Label text="Description" />
+														<Text
+															text="{myModel>/productdetails/0/ProductDescription}" />
+														<Label text="Supplier" />
+														<Text
+															text="{myModel>/productdetails/0/ProductSupplier}" />
+													</f:content>
+												</f:SimpleForm>
+											</u:blocks>
+										</u:ObjectPageSubSection>
+									</u:subSections>
+								</u:ObjectPageSection>
+								<u:ObjectPageSection title="Review">
+									<u:subSections>
+										<u:ObjectPageSubSection>
+											<u:blocks>
+												<f:SimpleForm maxContainerCols="2"
+													editable="false" layout="ResponsiveGridLayout"
+													labelSpanL="12" labelSpanM="12" emptySpanL="0"
+													emptySpanM="0" columnsL="1" columnsM="1">
+													<f:content>
+														<Label text="Product Reviews" />
+														<VBox>
+															<core:Icon src="sap-icon://customer"
+																size="35px" />
+															<Text
+																text="{myModel>/productdetails/0/productreview1}" />
+														</VBox>
+														<Label />
+														<VBox>
+															<core:Icon src="sap-icon://customer"
+																size="35px" />
+															<Text
+																text="{myModel>/productdetails/0/productreview2}" />
+														</VBox>
+														<Label text="Overall Rating" />
+														<RatingIndicator maxValue="5"
+															class="sapUiSmallMarginBottom" value="{myModel>/productdetails/0/ratevalue}" iconSize="32px" editable="false"/>
+														<Label />
+														<HBox>
+															<ToggleButton icon="sap-icon://thumb-up"
+																width="20%" pressed="{myModel>/productdetails/0/thumbup}" enabled="false"/>
+															<ToggleButton icon="sap-icon://thumb-down"
+																width="20%" pressed="{myModel>/productdetails/0/thumbdown}" enabled="false"/>
+														</HBox>
+													</f:content>
+												</f:SimpleForm>
+											</u:blocks>
+										</u:ObjectPageSubSection>
+									</u:subSections>
+								</u:ObjectPageSection>
+								<u:ObjectPageSection title="Images">
+									<u:subSections>
+										<u:ObjectPageSubSection>
+											<u:blocks>
+												<f:SimpleForm maxContainerCols="2"
+													editable="false" layout="ResponsiveGridLayout"
+													labelSpanL="12" labelSpanM="12" emptySpanL="0"
+													emptySpanM="0" columnsL="1" columnsM="1">
+													<f:content>
+														<Label text="Product Images" />
+														<HBox>
+															<Image
+																src="{myModel>/productdetails/0/productimage1}"
+																decorative="false" width="170px" densityAware="false">
+																<detailBox>
+																	<LightBox>
+																		<LightBoxItem
+																			imageSrc="{myModel>/productdetails/0/productimage1}"
+																			alt="Beamer" />
+																	</LightBox>
+																</detailBox>
+															</Image>
+														</HBox>
+														<HBox>
+															<Image
+																src="{myModel>/productdetails/0/productimage2}"
+																decorative="false" width="170px" densityAware="false">
+																<detailBox>
+																	<LightBox>
+																		<LightBoxItem
+																			imageSrc="{myModel>/productdetails/0/productimage2}"
+																			alt="Beamer" />
+																	</LightBox>
+																</detailBox>
+															</Image>
+														</HBox>
+														<HBox>
+															<Image
+																src="{myModel>/productdetails/0/productimage3}"
+																decorative="false" width="170px" densityAware="false">
+																<detailBox>
+																	<LightBox>
+																		<LightBoxItem
+																			imageSrc="{myModel>/productdetails/0/productimage3}"
+																			alt="Beamer" />
+																	</LightBox>
+																</detailBox>
+															</Image>
+														</HBox>
+													</f:content>
+												</f:SimpleForm>
+											</u:blocks>
+										</u:ObjectPageSubSection>
+									</u:subSections>
+								</u:ObjectPageSection>
+							</u:sections>
+						</u:ObjectPageLayout>
+					</fn:midColumnPages>
+				</fn:FlexibleColumnLayout>
+			</Page>
+		</detailPages>
+		<masterPages>
+			<Page id="master" title="Categories" backgroundDesign="List">
+					<SearchField width="100%" liveChange=".onSearch"/>
+				<List items="{myModel>/categorydata}" mode="SingleSelectMaster"
+					selectionChange=".onSelectChange" id="listid">
+					<StandardListItem title="{myModel>CategoryName}"
+						type="Navigation" custom:to="productdetail" id="id1" />
+				</List>
+			</Page>
+		</masterPages>
+	</SplitApp>
+		</Page>
 </core:View>

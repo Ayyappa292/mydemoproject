@@ -25,7 +25,7 @@
 			}
 		},
 		"models": {
-			"mymodel": {
+			"myModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "data/mydata.json"
 			}
@@ -36,7 +36,9 @@
 				"viewType": "XML",
 				"async": true,
 				"viewPath": "mydemoproject.myviews",
-				"controlId": ["App"],
+				"controlId": [
+					"App"
+				],
 				"controlAggregation": "pages"
 			},
 			"routes": [
@@ -44,6 +46,16 @@
 					"pattern": "",
 					"name": "firstview",
 					"target": "firstview"
+				},
+				{
+					"pattern": "admin",
+					"name": "admin",
+					"target": "admin"
+				},
+				{
+					"pattern":"login",
+					"name":"login",
+					"target":"login"
 				},
 				{
 					"pattern": "mainview",
@@ -61,14 +73,19 @@
 					"target": "paymentview"
 				},
 				{
-				"pattern":"billdetails",
-				"name":"mybilldetails",
-				"target":"mybilldetails"
+					"pattern": "billdetails",
+					"name": "mybilldetails",
+					"target": "mybilldetails"
 				},
 				{
-				"pattern":"Admin",
-				"name":"myadmin",
-				"target":"myadmin"
+					"pattern": "myorders",
+					"name": "myorders",
+					"target": "myorders"
+				},
+				{
+					"pattern": "status",
+					"name": "status",
+					"target": "status"
 				}
 			],
 			"targets": {
@@ -77,10 +94,14 @@
 					"viewType": "XML",
 					"viewId": "view1"
 				},
+				"login":{
+					"viewName":"loginview",
+					"viewType":"XML"
+				},
 				"mainview": {
 					"viewName": "mainview",
 					"viewType": "XML",
-					"viewId":"view2"
+					"viewId": "view2"
 				},
 				"cartview": {
 					"viewName": "cart",
@@ -92,13 +113,21 @@
 					"viewType": "XML",
 					"viewId": "view4"
 				},
-				"mybilldetails":{
-				"viewName":"recieptview",
-				"viewType":"XML"
+				"mybilldetails": {
+					"viewName": "recieptview",
+					"viewType": "XML"
 				},
-				"myadmin":{
-				"viewName":"admin",
-				"viewType":"XML"
+				"myorders": {
+					"viewName": "myorders",
+					"viewType": "XML"
+				},
+				"status": {
+					"viewName": "status",
+					"viewType": "XML"
+				},
+				"admin": {
+					"viewName": "admin",
+					"viewType": "XML"
 				}
 			}
 		},

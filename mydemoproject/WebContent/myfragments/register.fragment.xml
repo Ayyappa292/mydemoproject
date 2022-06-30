@@ -4,21 +4,29 @@
 	controllerName="mydemoproject.mycontrollers.tileview"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Dialog title="Please enter Details to Continue">
-		<f:SimpleForm layout="ResponsiveGridLayout" >
+		<f:SimpleForm id="FieldGroupView" minWidth="1024"
+			maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+			labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0"
+			columnsL="2" columnsM="2">
 			<f:content>
-				<Label text="Your Name" required="true"/>
-				<Input id="username" width="40%"/>
-				<Label text="Mobile Number" required="true"/>
-				<Input id="mobile" width="40%"/>
-				<Label text="E-mail ID" required="true"/>
-				<Input id="emailid" width="40%"/>
+				<Label text="User Name" required="true" />
+				<Input id="username" width="40%" value="{myModel>/newUser/CustName}"/>
+				<Label text="Password" required="true"/>
+				<Input id="password" type="Password" width="40%" value="{myModel>/newUser/CustPassword}"/>
+				<Label text="Customer No" required="true"/>
+				<Input id="custno" type="Number" width="40%" value="{myModel>/newUser/CustId}"/>
+				<Label text="Mobile Number" required="true" />
+				<Input id="mobile" width="40%" type="Number" value="{myModel>/newUser/CustPhoneNo}"/>
+				<Label text="E-mail ID" required="true" />
+				<Input id="emailid" width="40%" value="{myModel>/newUser/CustEmail}"/>
 				<VBox>
-				<HBox>
-				<Button text="Submit" press=".onSubmitDetails" />
-				<Button text="Cancel" press=".onCancleDetails" />
-				</HBox>
+					<HBox>
+						<Button text="Submit" press=".onSubmitDetails" />
+						<Button text="Cancel" press=".onCancleDetails" />
+					</HBox>
 				</VBox>
 			</f:content>
 		</f:SimpleForm>
 	</Dialog>
 </core:FragmentDefinition>
+

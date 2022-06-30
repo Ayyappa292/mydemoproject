@@ -5,19 +5,35 @@ sap.ui.controller("mydemoproject.mycontrollers.recieptview", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf mydemoproject.recieptview
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var hour = today.getHours();
+        var Minutes = today.getMinutes();
+        var Seconds = today.getSeconds();
+        var today1 = ( dd+'.'+mm+'.'+yyyy+' '+hour+':'+Minutes+':'+Seconds);
+        this.getView().byId("date").setText(today1.valueOf(Text));
+
+
+	},
 /**
  * going back to shop function 
  */
 	onGoToShop : function(){
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		 oRouter.navTo("mainview");
-		let oModel = this.getView().getModel("mymodel");
+		let oModel = this.getView().getModel("myModel");
 		let oData = oModel.getProperty("/cart");
+		let oOldPrice = oModel.getProperty("/cartvalue");
 		let aArray=[];
 		oModel.setProperty("/cart",aArray);
+		let nNewPrice = 0;
+		oModel.setProperty("/cartvalue", nNewPrice);
+		oModel.getProperty("/noitems");
+		let oLen = 0
+		oModel.setProperty("/noitems", oLen);
 	}
 
 /**

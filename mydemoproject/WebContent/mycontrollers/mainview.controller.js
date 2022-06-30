@@ -3,16 +3,19 @@ sap.ui.define([
     	"sap/ui/model/Filter",
     	"sap/ui/model/FilterOperator",
     	"sap/m/MessageToast",
+    	"sap/ui/core/Fragment",
               ],function(Controller,Filter,FilterOperator,MessageToast){
 	              "use strict";
 	  return Controller.extend("mydemoproject.mycontrollers.mainview",{
+
 /*
- * onInit: function() { },
+ * onInit: function() { var nOldValue =
+ * this.getView().byId("CurrentValue").getValue(); },
  */
-		  
-		  onInit(){
-			debugger;  
-		  },
+ 
+// //
+// onInit(){
+// },
 		  /**
 			 * For Searching a Category
 			 */
@@ -40,13 +43,16 @@ sap.ui.define([
 	 * Category Selection change Function
 	 */
 	onSelectChange : function(oEvent) {
+		debugger;
 		let list = this.getView().byId("listid").getSelectedItem();
-		let oObj = list.getBindingContext("mymodel").getObject();
-		let oName = this.getView().getModel("mymodel").getProperty("/details");
-		let oItem = oName[oObj.name];
-		let aEmpty = this.getView().getModel("mymodel").getProperty("/adetails");
+		let oObj = list.getBindingContext("myModel").getObject();
+		let aProductData = oObj.to_product.results;
+		this.getView().getModel("myModel").setProperty("/productdata",aProductData);
+		/*let oName = this.getView().getModel("myModel").getProperty("/categorydata");
+		let oItem = oName[oObj.CategoryName];
+		let aEmpty = this.getView().getModel("myModel").getProperty("/productdata");
 		aEmpty=[...oItem];
-		this.getView().getModel("mymodel").setProperty("/adetails",aEmpty);
+		this.getView().getModel("myModel").setProperty("/adetails",aEmpty);*/
 		var sToPageId = oEvent.getParameter("listItem")
 		.getCustomData()[0].getValue();
 		this.getSplitAppObj()
@@ -57,33 +63,32 @@ sap.ui.define([
 		 * On Item Add to cart Function
 		 */
 		onAddToCart: function(oEvent){
-			let oModel = this.getView().getModel("mymodel");
-			let oData = oModel.getProperty("/productdetails");// [cart]
-			let sName =oEvent.getSource().getBindingContext("mymodel").getObject("productname");
-			let sImg =oEvent.getSource().getBindingContext("mymodel").getObject("productimage");
-			let nPrice =oEvent.getSource().getBindingContext("mymodel").getObject("price");
-			oData.push({
-				productname:sName,
-				productimage:sImg,
-				price:nPrice
+			let oModel = this.getView().getModel("myModel");
+			let oSelectedProduct = oEvent.getSource().getBindingContext("myModel").getObject()
+			let aCart = oModel.getProperty("/cart");
+			aCart.push({
+				ProductName:oSelectedProduct.ProductName,
+				ProductImage:oSelectedProduct.ProductImage,
+				ProductPrice:oSelectedProduct.ProductPrice,
+				ProductSupplier:oSelectedProduct.ProductSupplier,
+				ProductId:oSelectedProduct.ProductId
 			});
-			oModel.setProperty("/cart",oData);
+			oModel.setProperty("/cart",aCart);
 			MessageToast.show("Item Added Successfully");
 			let oOldPrice=oModel.getProperty("/cartvalue");
-			 let nParse1=parseInt(oOldPrice);
-			 let nParse2=parseInt(nPrice);
-			 let nNewprice = nParse1+nParse2;
-			 oModel.setProperty("/cartvalue",nNewprice);
+			 let nOldPrice=parseInt(oOldPrice);
+			 let nNewPrice=parseInt(oSelectedProduct.ProductPrice);
+			 let nUpdatePrice = nOldPrice+nNewPrice;
+			 oModel.setProperty("/cartvalue",nUpdatePrice);
 			 oModel.getProperty("/noitems");
-			 let oLen=oData.length;
-			 oModel.setProperty("/noitems",oLen);
-			
+			 let nLen=aCart.length;
+			 oModel.setProperty("/noitems",nLen);	
 		},
 		/**
 		 * This Function Navigates to The Cart Page
 		 */
 		onCart : function(){
-			let oModel = this.getView().getModel("mymodel");
+			let oModel = this.getView().getModel("myModel");
 			let oData = oModel.getProperty("/cart");
 			if(oData.length)
 				{
@@ -100,37 +105,92 @@ sap.ui.define([
 		 */
 		onItemPress: function(oEvent){
 			debugger;
-			let oModel = this.getView().getModel("mymodel");
-			let oData = oModel.getProperty("/details");
-			let oName = oEvent.getSource().getSelectedItem().getBindingContext("mymodel").getObject();
-			// let oDetails= oData.find(element=>element.productname == oName);
+			let oModel = this.getView().getModel("myModel");
+			let oObj = oEvent.getSource().getSelectedItem().getBindingContext("myModel").getObject();
 			let aArray =  oModel.getProperty("/productdetails");
 			aArray=[];
-			aArray.push(oName);
+			aArray.push(oObj);
 			oModel.setProperty("/productdetails",aArray);
 			oModel.getProperty("/flexcolumnlayout");
 			let oLayout = "TwoColumnsMidExpanded";
 			oModel.setProperty("/flexcolumnlayout",oLayout);
-			console.log(oModel.getProperty("/productdetails"));
+			
 		},
 		/**
 		 * Handling close mid column
 		 */
 		
 		onHandleClose : function(){
-			let oModel = this.getView().getModel("mymodel");
+			let oModel = this.getView().getModel("myModel");
 			oModel.getProperty("/flexcolumnlayout");
 			let oLayout = "OneColumn";
 			oModel.setProperty("/flexcolumnlayout",oLayout);
+		},
+		
+		/*
+		 * onWriteReview : function(){ if (!this.newdialog) { this.newdialog =
+		 * sap.ui.xmlfragment("mydemoproject.myfragments.review", this); }
+		 * this.newdialog.open();
+		 * 
+		 *  }, onPostReview : function(oEvent){ debugger; let sReview =
+		 * sap.ui.getCore().byId("review").getValue(); let oModel =
+		 * this.getView().getModel("myModel"); let oData =
+		 * oModel.getProperty("/productreview3")
+		 * oModel.setProperty("/productreview3",sReview);
+		 * this.newdialog.close(); },
+		 * 
+		 *//**
+			 * Closes the Dialog
+			 *//*
+			 * onCancelReview : function() { this.newdialog.close(); },
+			 */
+			
+		
+ /**
+	 * for popover
+	 */
+		onAvatarPressed: function(oEvent) {
+		     if (!this.oPopover) {
+		    	    this._oPopover = sap.ui.xmlfragment("mydemoproject.myfragments.view",this);
+		    	    this.getView().addDependent(this._oPopover);
+		    	   }  
+		    	   this._oPopover.openBy(oEvent.getSource());
+		 },
+		
+		/**
+		 * logout
+		 */
+		handlelogoutPress : function ( oEvent){
+			
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			 oRouter.navTo("firstview");
+		},
+		onMyOrders : function (){
+			
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("myorders");
+		},
+		/*
+		 * Show Notifications
+		 */
+		onNotificationPress : function(oEvent){
+			debugger;
+		     if (!this.oPopoverNotification) {
+		    	    this._oPopoverNotification = sap.ui.xmlfragment("mydemoproject.myfragments.notification",this);
+		    	    this.getView().addDependent(this._oPopoverNotification);
+		    	   }  
+		    	   this._oPopoverNotification.openBy(oEvent.getSource());
+			
 		}
 		
-/**
- * Similar to onAfterRendering, but this hook is invoked before the controller's
- * View is re-rendered (NOT before the first rendering! onInit() is used for
- * that one!).
- * 
- * @memberOf mydemoproject.mainview
- */
+		
+		/**
+		 * Similar to onAfterRendering, but this hook is invoked before the
+		 * controller's View is re-rendered (NOT before the first rendering!
+		 * onInit() is used for that one!).
+		 * 
+		 * @memberOf mydemoproject.mainview
+		 */
 // onBeforeRendering: function() {
 //
 // },

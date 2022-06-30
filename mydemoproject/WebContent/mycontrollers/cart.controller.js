@@ -24,7 +24,7 @@ sap.ui.controller("mydemoproject.mycontrollers.cart", {
 	 To Navigate to Payment Page
 	 **/
 	onPayment : function() {
-		var oModel = this.getView().getModel("mymodel");
+		var oModel = this.getView().getModel("myModel");
 		let oData = oModel.getProperty("/cart");
 		if (oData.length) {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -37,9 +37,9 @@ sap.ui.controller("mydemoproject.mycontrollers.cart", {
 	 * For Deletion or Cancelation of an Item from the Cart
 	 */
 	onCancelItem : function(oEvent) {
-		let nPrice = oEvent.getSource().getBindingContext("mymodel").getObject("price");
-		let oDeleteRecord = oEvent.getSource().getBindingContext("mymodel").getObject();
-		let oModel = this.getView().getModel("mymodel");
+		let nPrice = oEvent.getSource().getBindingContext("myModel").getObject("price");
+		let oDeleteRecord = oEvent.getSource().getBindingContext("myModel").getObject();
+		let oModel = this.getView().getModel("myModel");
 		let oData = oModel.getProperty("/cart");
 		for (var i = 0; i < oData.length; i++) {
 			if (oData[i] == oDeleteRecord) {

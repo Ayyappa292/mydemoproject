@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Popover title="New Notifications"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom">
+		<VBox class="sapUiSmallMargin">
+			<NotificationList>
+				<layoutData>
+					<FlexItemData maxWidth="600px" />
+				</layoutData>
+				<NotificationListItem
+					title="New Products are Available "
+					description="All New Products are avaiable with us Buy now and get a sale of 20% Discount on your First Purchase of an Product"
+					showCloseButton="true" datetime="1 Min Ago " unread="true"
+					priority="None" close=".onItemClose" press=".onListItemPress"
+					authorName="Ayyappa"
+					authorPicture="test-resources/sap/m/images/Woman_04.png">
+				</NotificationListItem>
+			</NotificationList>
+			<NotificationList>
+				<layoutData>
+					<FlexItemData maxWidth="600px" />
+				</layoutData>
+				<NotificationListItem
+					title="Great Sale Starts Today "
+					description="The Great Sale is about to start get all of your interested products at a lower cost and with Massive Discounts about to come tonight Sale starts at Today Mid Night 12 AM and lasts for this WeekEnd Grab all of your products at an incrediable low cost "
+					showCloseButton="true" datetime="Just Now " unread="true"
+					priority="None" close=".onItemClose" press=".onListItemPress"
+					authorName="Ayyappa"
+					authorPicture="test-resources/sap/m/images/Woman_04.png">
+				</NotificationListItem>
+			</NotificationList>
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>
+				

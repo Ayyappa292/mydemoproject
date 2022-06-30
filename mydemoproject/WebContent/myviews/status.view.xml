@@ -1,0 +1,41 @@
+<mvc:View controllerName="mydemoproject.mycontrollers.myorders"
+	xmlns="sap.m" xmlns:ui="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc" height="100%">
+		<ui:ProcessFlow >
+	<ui:nodes>
+		<ui:ProcessFlowNode laneId="1" nodeId="0"
+			 title="OP"
+			titleAbbreviation="Order Processed" state="Positive"
+			stateText="OnTime" texts="Cleared" highlighted="false" focused="true" />
+		<ui:ProcessFlowNode laneId="2" nodeId="1"
+			 title="OP"
+			titleAbbreviation="In 
+		Movement" state="Negative"
+			stateText="OnTime" texts="Not Cleared" highlighted="true"
+			focused="true" />
+		<ui:ProcessFlowNode laneId="3" nodeId="2"
+			 title="OP" titleAbbreviation="Dispatched"
+			state="Negative" stateText="OnTime" texts="Not yet dispatched "
+			highlighted="false" focused="true" />
+		<ui:ProcessFlowNode laneId="4" nodeId="3"
+			 title="OP"
+			titleAbbreviation="Not 
+		Delivered" state="Negative"
+			stateText="OnTime" texts="Not out for delivery" highlighted="false"
+			focused="true" />
+	</ui:nodes>
+	<ui:lanes>
+		<ui:ProcessFlowLaneHeader laneId="1"
+			iconSrc="sap-icon://order-status" text="Order Processing"
+			position="0" />
+		<ui:ProcessFlowLaneHeader laneId="2"
+			iconSrc="sap-icon://order-status" text="In Transit" position="1" />
+		<ui:ProcessFlowLaneHeader laneId="3"
+			iconSrc="sap-icon://order-status" text="Yet to be Dispatched"
+			position="2" />
+		<ui:ProcessFlowLaneHeader laneId="4"
+			iconSrc="sap-icon://order-status" text="Item Delivered" position="3" />
+	</ui:lanes>
+</ui:ProcessFlow>
+		
+</mvc:View>

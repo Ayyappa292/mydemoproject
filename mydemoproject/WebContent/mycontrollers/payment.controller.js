@@ -17,7 +17,7 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 	onGoToCart : function() {
 		debugger;
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-		oRouter.navTo("cartview");
+		oRouter.navTo("mycart");
 		this.getView().byId("cartvalue");
 	},
 	/**
@@ -25,6 +25,13 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 	 */
 	onSubmitPayment : function() {
 		debugger;
+		let transid = Math.floor(100000 + Math.random() * 9000);
+		let oModel = this.getView().getModel("myModel");
+		let oData = oModel.getProperty("/transactionid");
+		oModel.setProperty("/transactionid",transid);
+		let otp = Math.floor(1000 + Math.random() * 9000);
+		let oOtp = oModel.getProperty("/otpno");
+		oModel.setProperty("/otpno",oOtp);
 		let sName = this.getView().byId("name").getValue();
 		let sStreetName = this.getView().byId("streetname").getValue();
 		let nStreetNo = this.getView().byId("streetno").getValue();
@@ -81,6 +88,16 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 			new sap.m.MessageToast.show("your order is placed Successfully");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			 oRouter.navTo("mybilldetails");
+			this.getView().byId("combobox1").setValue(null);
+			this.getView().byId("combobox2").setValue(null);
+			this.getView().byId("Date").setValue(null);
+			this.getView().byId("name").setValue("");
+			this.getView().byId("streetname").setValue("");
+			this.getView().byId("streetno").setValue("");
+			this.getView().byId("zipcode").setValue("");
+			this.getView().byId("city").setValue("");
+			this.getView().byId("cardno").setValue("");
+			this.getView().byId("cvv").setValue("");
 		} else {
 			this.getView().byId("cvv").setValueState(sap.ui.core.ValueState.Error);
 			alert("Please Enter all your details")

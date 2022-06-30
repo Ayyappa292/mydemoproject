@@ -34,6 +34,10 @@
 		<param-name>com.sap.ui5.resource.DEV_MODE</param-name>
 		<param-value>false</param-value>
 	</context-param>
+	<context-param>
+		<param-name>com.sap.ui5.proxy.REMOTE_LOCATION</param-name>
+		<param-value>https://sun.pivoxlabs.com:443</param-value>
+	</context-param>
 	<!-- END: DEV MODE -->
 
 

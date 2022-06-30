@@ -11,14 +11,11 @@
 					<TileContent footer="Browse Products">
 						<ImageContent src="sap-icon://retail-store" />
 					</TileContent>
-					<TileContent>
-						<ImageContent src="sap-icon://retail-store-manager" />
-					</TileContent>
 				</GenericTile>
 				<GenericTile header="Administrative Department"
 					press=".onAdmin">
 					<TileContent footer="Restricted Access">
-						<ImageContent src="sap-icon://key-user-settings" />
+						<ImageContent src="sap-icon://retail-store-manager" />
 					</TileContent>
 				</GenericTile>
 			</FlexBox>

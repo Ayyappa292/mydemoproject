@@ -10,49 +10,45 @@
 				<f:content>
 					<Text text="Order Summary" class="text1" />
 					<Label text="Total No of Items" />
-					<Text text="{mymodel>/noitems}" />
+					<Text text="{myModel>/noitems}" />
 					<Label text="Total Amount to be paid" />
-					<Text text="{mymodel>/cartvalue}$" />
+					<Text text="{myModel>/cartvalue}$" />
 				</f:content>
 			</f:SimpleForm>
 			<f:SimpleForm id="FieldGroupView" minWidth="1024"
 				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				title="Shopping Cart - Checkout" labelSpanL="4" labelSpanM="4"
 				emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2"
-				validateFieldGroup="onValidateFieldGroup">
+				>
 				<f:content>
 					<core:Title text="Billing Information" />
 					<Label text="Name" />
-					<Input fieldGroupIds="Billing Information" id="name" />
+					<Input fieldGroupIds="Billing Information" id="name" placeholder="Enter your Name"/>
 					<Label text="Street/No." />
-					<Input fieldGroupIds="Billing Information" id="streetname" />
-					<Input fieldGroupIds="Billing Information" id="streetno">
+					<Input fieldGroupIds="Billing Information" id="streetname" placeholder="enter your street name"/>
+					<Input fieldGroupIds="Billing Information" id="streetno" placeholder="enter your street no">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
 					<Label text="ZIP Code/City" />
 					<Input fieldGroupIds="Billing Information" type="Number"
-						id="zipcode">
+						id="zipcode" placeholder="enter zipcode">
 						<layoutData>
 							<l:GridData span="L3 M3 S4" />
 						</layoutData>
 					</Input>
-					<Input fieldGroupIds="Billing Information" id="city" />
+					<Input fieldGroupIds="Billing Information" id="city" placeholder="enter your city"/>
 					<Label text="Country" />
-					<Select fieldGroupIds="Billing Information" width="100%">
+					<ComboBox fieldGroupIds="Billing Information" width="100%" id="combobox1" placeholder="Choose your country">
 						<items>
-							<core:Item text="" />
 							<core:Item text="India" key="India" />
 							<core:Item text="United States" key="United States" />
 						</items>
-					</Select>
-					<core:Title text="Discount Code" />
-					<Input fieldGroupIds="Discount Code"
-						placeholder="Enter your discout code here..." />
+					</ComboBox>
 					<core:Title text="Credit Card" />
 					<Label text="Card Type" />
-					<ComboBox fieldGroupIds="Credit Card" width="100%"
+					<ComboBox fieldGroupIds="Credit Card" width="100%" id="combobox2"
 						placeholder="Choose your Card Type">
 						<items>
 							<core:Item text="Mastercard" />
@@ -61,12 +57,12 @@
 						</items>
 					</ComboBox>
 					<Label text="Credit Card Number" />
-					<Input fieldGroupIds="Credit Card" type="Number" id="cardno"/>
+					<Input fieldGroupIds="Credit Card" type="Number" id="cardno" placeholder="enter your card number"/>
 					<Label text="Expiry Date" labelFor="date" />
-					<DatePicker id="date" placeholder="Enter Date"
+					<DatePicker id="Date" placeholder="Enter Date"
 						class="sapUiSmallMarginBottom" />
 					<Label text="CVV" />
-					<Input fieldGroupIds="Credit Card" type="Number" id="cvv" width="10%"/>
+					<Input fieldGroupIds="Credit Card" type="Number" id="cvv" width="10%" placeholder="cvv"/>
 					<Label />
 					<Button text="Submit" width="20%" press=".onSubmitPayment" />
 				</f:content>
