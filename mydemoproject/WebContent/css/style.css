@@ -13,3 +13,21 @@
 .text1 {
 	font-size: 25px;
 }
+
+.equalColumns .columns {
+	min-height: 200px;
+}
+
+.equalColumns .columns .sapMFlexItem {
+	padding: 0.5rem;
+}
+
+.bold {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.boldheader {
+	font-weight: bold;
+	font-size: 25px;
+}

@@ -1,119 +1,171 @@
-<!-- <mvc:View controllerName="mydemoproject.mycontrollers.admin"
-	xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls"
+<mvc:View controllerName="mydemoproject.mycontrollers.admin"
+	xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls" xmlns:core="sap.ui.core"
 	xmlns:layout="sap.ui.layout" xmlns:m="sap.suite.ui.microchart"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
 	xmlns:viz.data="sap.viz.ui5.data" height="100%">
-	<Page title="Admin Page">
-		<FlexBox width="20rem" height="10rem" alignItems="Center"
-			justifyContent="Center">
-			<m:InteractiveBarChart labelWidth="25%"
-				selectionChanged="selectionChanged" press="press">
-				<m:bars>
-					<m:InteractiveBarChartBar
-						label="Product 1" value="10" />
-					<m:InteractiveBarChartBar
-						label="Product 2" value="20" />
-					<m:InteractiveBarChartBar
-						label="Product 3" value="70" />
-				</m:bars>
-			</m:InteractiveBarChart>
-		</FlexBox>
-		<FlexBox width="20rem" height="400px" alignItems="Center"
-			justifyContent="Center">
-			<items>
-				<m:InteractiveDonutChart
-					selectionChanged="onSelectionChanged">
-					<m:segments>
-						<m:InteractiveDonutChartSegment
-							label="Implementation Phase" value="40.0" displayedValue="40.0%" />
-						<m:InteractiveDonutChartSegment
-							label="Design Phase" value="21.5" displayedValue="21.5%" />
-						<m:InteractiveDonutChartSegment
-							label="Test Phase" value="38.5" displayedValue="38.5%" />
-					</m:segments>
-				</m:InteractiveDonutChart>
-			</items>
-		</FlexBox>
-	</Page>
-</mvc:View> -->
+	<Page>
+		<!-- <HBox>
+			<FlexBox width="30rem" height="200px" class="columns">
+				<items>
+					<m:InteractiveDonutChart
+						selectionChanged="onSelectionChanged">
+						<m:segments>
+							<m:InteractiveDonutChartSegment
+								label="Customer" value="40.0" displayedValue="20.0%" />
+							<m:InteractiveDonutChartSegment
+								label="Supplier" value="21.5" displayedValue="21.5%" />
+							<m:InteractiveDonutChartSegment
+								label="Test Phase" value="38.5" displayedValue="38.5%" />
+						</m:segments>
+					</m:InteractiveDonutChart>
+				ssssss</items>
+				<layoutData>
+					<FlexItemData growFactor="1" baseSize="0"
+						backgroundDesign="Solid" styleClass="sapUiTinyMargin" />
+				</layoutData>
+			</FlexBox>
+			<FlexBox width="30rem" height="200px" class="columns">
+				<m:InteractiveBarChart labelWidth="25%"
+					selectionChanged="selectionChanged" press="press">
+					<m:bars>
+						<m:InteractiveBarChartBar
+							label="Product 1" value="10" />
+						<m:InteractiveBarChartBar
+							label="Product 2" value="40" />
+						<m:InteractiveBarChartBar
+							label="Product 3" value="90" />
+					</m:bars>
+				</m:InteractiveBarChart>
+				<layoutData>
+					<FlexItemData growFactor="1" baseSize="0"
+						backgroundDesign="Solid" styleClass="sapUiTinyMargin" />
+				</layoutData>
+			</FlexBox>
+		</HBox>
+		<Table mode="MultiSelect">
+			<headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Title text="Contracts" level="H2" />
+						<ToolbarSpacer />
+						<ComboBox placeholder="" >
+							<items>
+								<core:Item text="Active" key="Active" />
+								<core:Item text="InActive" key="InActive" />
+							</items>
+						</ComboBox>
+						<Button text="Sort" icon="sap-icon://sort" />
+						<Button text="Filter" icon="sap-icon://filter" />
+						<ToolbarSpacer />
+						<Button text="Adapt Filter" />
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Id" />
+				</Column>
+				<Column>
+					<Text text="Contract Number" />
+				</Column>
 
-<mvc:View
-		controllerName="mydemoproject.mycontrollers.admin"
-		xmlns="sap.suite.ui.commons.networkgraph"
-		xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
-		xmlns:mvc="sap.ui.core.mvc"
-		xmlns:m="sap.m"
-		xmlns:l="sap.ui.layout"
-		height="100%">
-	<l:FixFlex vertical="true" fixContentSize="5%">
-		<l:fixContent>
-			<m:HBox width="100%" renderType="Bare">
-				<m:Button text="Free Range Marvel" press="freeRangeMarvel" class="sapUiTinyMargin"/>
-				<m:Button text="Fixed Avengers Timeline" press="fixedAvengersTimeline" class="sapUiTinyMargin"/>
-				<m:Button text="Thor &amp; Captain Standoff" press="thorCaptainStandoff" class="sapUiTinyMargin"/>
-				<m:Button text="Arc of Secondary Heroes" press="arcOfSecondaryHeroes" class="sapUiTinyMargin"/>
-			</m:HBox>
-			<!--<m:HBox width="100%" renderType="Bare">-->
-				<!--<m:Slider width="50%" value="{settings>/optimalDistanceConstant}" min="0.2" max="0.4" step="0.01" enableTickmarks="true"/>-->
-			<!--</m:HBox>-->
-		</l:fixContent>
-		<l:flexContent>
-			<l:FixFlex vertical="false" fixContentSize="100%">
-				<l:fixContent>
-					<Graph  enableWheelZoom="false"
-							nodes="{/nodes}"
-							lines="{/lines}"
-							groups="{/groups}"
-							id="graph">
-						<layoutData>
-							<m:FlexItemData minWidth="75%" maxWidth="75%"/>
-						</layoutData>
-						<layoutAlgorithm>
-							<layout:ForceDirectedLayout
-									optimalDistanceConstant="0.26"
-									maxIterations="{settings>/maxIterations}"
-									maxTime="{settings>/maxTime}"
-									initialTemperature="{settings>/initialTemperature}"
-									coolDownStep="{settings>/coolDownStep}">
-							</layout:ForceDirectedLayout>
-						</layoutAlgorithm>
-						<nodes>
-							<Node
-									height="{settings>/height}"
-									key="{key}"
-									title="{title}"
-									icon="{icon}"
-									group="{group}"
-									attributes="{path:'attributes', templateShareable:true}"
-									shape="{shape}"
-									status="{status}"
-									x="{x}"
-									y="{y}">
-								<attributes>
-									<ElementAttribute
-											label="{label}"
-											value="{value}"/>
-								</attributes>
-							</Node>
-						</nodes>
-						<lines>
-							<Line
-									from="{from}"
-									to="{to}"
-									status="{status}"
-							>
-							</Line>
-						</lines>
-						<groups>
-							<Group
-									key="{key}"
-									title="{title}">
-							</Group>
-						</groups>
-					</Graph>
-				</l:fixContent>
-			</l:FixFlex>
-		</l:flexContent>
-	</l:FixFlex>
+				<Column>
+					<Text text="Contract Type" />
+				</Column>
+				<Column>
+					<Text text="Customr/Supplier" />
+				</Column>
+				<Column>
+					<Text text="Valid From" />
+				</Column>
+				<Column>
+					<Text text="Valid To" />
+				</Column>
+				<Column>
+					<Text text="Created By" />
+				</Column>
+				<Column>
+					<Text text="Created On" />
+				</Column>
+				<Column>
+					<Text text="Status" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Active" vAlign="Middle"
+					press="onPress">
+					<cells>
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+						<Text text="" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://create" text="Create" />
+				<ToolbarSpacer />
+			</OverflowToolbar>
+		</footer> -->
+	<mvc:View xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:goals="sap.uxap.sample.SharedBlocks.goals"
+	xmlns:personal="sap.uxap.sample.SharedBlocks.personal"
+	controllerName="sap.uxap.sample.KPIObjectPageHeader.controller.KPIObjectPageHeader"
+	height="100%">
+	<ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageHeader id="headerForTest" class="boldheader"
+							  objectTitle="Customer Segment Post"
+							  objectSubtitle="Id">
+
+			</ObjectPageHeader>
+			</headerTitle>
+			<headerTitle>
+			<ObjectPageHeader id="2aderForTest" class="boldheader"
+							  objectTitle="Customer Segment Post"
+							  objectSubtitle="Id">
+
+			</ObjectPageHeader>
+		</headerTitle>
+		<headerContent>
+			<layout:VerticalLayout>
+				<m:Label text="Segment Type" class="bold"/>
+				<m:Text text="Customer(CUST)"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<m:Label text="Primary Partner" class="bold"/>
+				<m:ObjectAttribute text="PSA AutoMobiles S.A SPOutliages"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<m:Label text="Segmentation Request Type" class="bold"/>
+				<m:ObjectAttribute text="Request 1(REQ1)"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<m:Label text="Validity" class="bold"/>
+				<m:ObjectAttribute text="Oct 29,2020 to Dec 30,2020)"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<m:Label text="Segmentation Request Type"/>
+				<m:ObjectAttribute text="Request 1(REQ1)"/>
+			</layout:VerticalLayout>
+		</headerContent>
+		
+	</ObjectPageLayout>
 </mvc:View>
+
+		
+		
+	</Page>
+</mvc:View>
+

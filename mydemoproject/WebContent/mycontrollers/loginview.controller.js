@@ -13,12 +13,16 @@ sap.ui.controller("mydemoproject.mycontrollers.loginview", {
 		var oDataModel = Component.getModel("oDataModel");
 		var oModel = Component.getModel("myModel");
 		oDataModel.read('/customer', {
+			urlParameters:{
+				"$expand" : "to_orders/to_orderdetails"
+			},
 			success : function(oResponse) {
 				oModel.setProperty("/customerdata", oResponse.results);
 			},
 			error : function(oResponse) {
 			}
 		})
+			
 	},
 
 	onlogin : function() {
@@ -65,7 +69,6 @@ sap.ui.controller("mydemoproject.mycontrollers.loginview", {
 	 * Validation of User Details in the Dialog
 	 */
 	onSubmitDetails : function() {
-		debugger;
 		let oModel = this.getView().getModel("myModel");
 		let sName = sap.ui.getCore().byId("username").getValue();
 		let nNumber = sap.ui.getCore().byId("mobile").getValue();
@@ -74,7 +77,7 @@ sap.ui.controller("mydemoproject.mycontrollers.loginview", {
 		let sPassword = sap.ui.getCore().byId("password").getValue();
 		let sNamePattern = /^[a-zA-Z\s]{3,15}$/; // start of patterns
 		let sEmailPattern = /^([A-Za-z0-9_\-\.])+\@([gmail|GMAIL])+\.(com)$/;
-		let nNumberPattern = /^[0-9]{10}$/;
+		let nNumberPattern = /^[0-9]{9}$/;
 		if (sNamePattern.test(sName)) // start of pattern checking
 		{
 			sap.ui.getCore().byId("username").setValueState(

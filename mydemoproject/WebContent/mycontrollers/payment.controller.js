@@ -15,7 +15,6 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 	 * This Function goes Back to the Cart Page
 	 */
 	onGoToCart : function() {
-		debugger;
 		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		oRouter.navTo("mycart");
 		this.getView().byId("cartvalue");
@@ -29,9 +28,9 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 		let oModel = this.getView().getModel("myModel");
 		let oData = oModel.getProperty("/transactionid");
 		oModel.setProperty("/transactionid",transid);
-		let otp = Math.floor(1000 + Math.random() * 9000);
-		let oOtp = oModel.getProperty("/otpno");
-		oModel.setProperty("/otpno",oOtp);
+		let nOtp = Math.floor(1000 + Math.random() * 9000);
+		oModel.setProperty("/otpno",nOtp);
+		let nCartValue = oModel.getProperty("/cartvalue");
 		let sName = this.getView().byId("name").getValue();
 		let sStreetName = this.getView().byId("streetname").getValue();
 		let nStreetNo = this.getView().byId("streetno").getValue();
@@ -88,6 +87,11 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 			new sap.m.MessageToast.show("your order is placed Successfully");
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			 oRouter.navTo("mybilldetails");
+			 var oDialog = sap.ui.xmlfragment("mydemoproject.myfragments.BusyDialog");
+			 oDialog.open();
+			 setTimeout(function() {
+			 oDialog.close();
+			 }, 3000);
 			this.getView().byId("combobox1").setValue(null);
 			this.getView().byId("combobox2").setValue(null);
 			this.getView().byId("Date").setValue(null);
@@ -98,12 +102,79 @@ sap.ui.controller("mydemoproject.mycontrollers.payment", {
 			this.getView().byId("city").setValue("");
 			this.getView().byId("cardno").setValue("");
 			this.getView().byId("cvv").setValue("");
+			let oCurrentUser = oModel.getProperty("/currentUser");
+			let aCart = oModel.getProperty("/cart");
+			var Component = this.getOwnerComponent();
+			var oDataModel = Component.getModel("oDataModel");
+	    	  oOrder = {
+						"CustId":oCurrentUser.CustId,
+						"TransId":transid,
+						"TotalAmount":nCartValue
+				}
+	            oDataModel.create("/orders", oOrder, {
+	                  method: "POST",  function(){
+	                	  var oDialog = sap.ui.xmlfragment("mydemoproject.myfragments.BusyDialog");
+	                	  oDialog.open();
+	                	  setTimeout(function() {
+	                	  oDialog.close();
+	  			          }, 3000);
+	                  },function(){
+	                        sap.m.MessageToast.show('Order failed',{duration:1000});
+
+	                  }});
+	    		 oDataModel.setUseBatch(true);
+	 			for (var i = 0; i < aCart.length; i++){
+	 				let nItemUniqueCode = Math.floor(10000 + Math.random() * 9000);
+	 				oOrderDetails= {
+						  "CustId":oCurrentUser.CustId,
+						  "TransId":transid,
+						  "ItemCode":nItemUniqueCode,
+						  "ProductName":aCart[i].ProductName,
+						  "ProductPrice":aCart[i].ProductPrice,
+						  "ProductImage":aCart[i].ProductImage,
+						  "ProductSupplier":aCart[i].ProductSupplier
+					}
+	 				 oDataModel.create("/orderdetails", oOrderDetails, {
+		                  method: "POST",  function(){
+		                	  var oDialog = sap.ui.xmlfragment("mydemoproject.myfragments.BusyDialog");
+		                	  oDialog.open();
+		                	  setTimeout(function() {
+		                	  oDialog.close();
+		  			          }, 3000);
+		                  },function(){
+		                        sap.m.MessageToast.show('Order failed',{duration:1000});
+
+		                  }});
+	 			}
+	 			oDataModel.setUseBatch(false);
 		} else {
 			this.getView().byId("cvv").setValueState(sap.ui.core.ValueState.Error);
 			alert("Please Enter all your details")
 		}
 		
 	}
+
+	/*for(var i=0;i<aOrder.length;i++)
+	  {
+	  NewData = {
+	 
+	  };
+	   batchChanges.push( oModel.createBatchOperation("/CREATE_DVR", "POST", NewData) ); 
+	  }
+	  console.log(batchChanges);
+	  oModel.addBatchChangeOperations(batchChanges); 
+	  oModel.submitBatch(function(data) { 
+	       oModel.refresh(); 
+	      console.log(data);
+
+	     }, function(err) { 
+
+	       alert("Error occurred "); 
+
+	     }); 
+	*/
+	
+	
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's
  * View is re-rendered (NOT before the first rendering! onInit() is used for

@@ -1,17 +1,39 @@
 {
-	"productdata":{
-				},
-	"productdetails":{
-				},
-	"newUser":{
-	"CustName":"",
-	"CustPassword":"",
-	"CustEmail":"",
-	"CustId":"",
-	"CustPhoneNo":""
+	"productdata": {
+		
 	},
-	"cart":[],
+	"productdetails": {
+		
+	},
+	"newUser": {
+		"CustName": "",
+		"CustPassword": "",
+		"CustEmail": "",
+		"CustId": "",
+		"CustPhoneNo": ""
+	},
+	"cart": [],
 	"cartvalue": "0$",
 	"noitems": "",
-	"flexcolumnlayout": "OneColumn"
+	"flexcolumnlayout": "OneColumn",
+	"TileCollection": [
+		{
+			"icon": "edit",
+			"type": "Monitor",
+			"press": "onEditClick",
+			"title": "Global MasterData Characteristics Maintenance Tool"
+		},
+		{
+			"icon": "activity-assigned-to-goal",
+			"type": "Monitor",
+			"press": "onAssignClick",
+			"title": "Global MasterData Characteristics Assignment Tool"
+		},
+		{
+			"icon": "map",
+			"type": "Monitor",
+			"press": "onMappingClick",
+			"title": "Global MasterData Characteristics Mapping Tool"
+		}
+	]
 }

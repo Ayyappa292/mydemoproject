@@ -37,22 +37,21 @@ sap.ui.controller("mydemoproject.mycontrollers.cart", {
 	 * For Deletion or Cancelation of an Item from the Cart
 	 */
 	onCancelItem : function(oEvent) {
-		let nPrice = oEvent.getSource().getBindingContext("myModel").getObject("price");
 		let oDeleteRecord = oEvent.getSource().getBindingContext("myModel").getObject();
 		let oModel = this.getView().getModel("myModel");
-		let oData = oModel.getProperty("/cart");
-		for (var i = 0; i < oData.length; i++) {
-			if (oData[i] == oDeleteRecord) {
-				oData.splice(i, 1);
-				oModel.setProperty("/cart", oData);
+		let aCart = oModel.getProperty("/cart");
+		for (var i = 0; i < aCart.length; i++) {
+			if (aCart[i] == oDeleteRecord) {
+				aCart.splice(i, 1);
+				oModel.setProperty("/cart", aCart);
 				let oOldPrice = oModel.getProperty("/cartvalue");
-				let nParse1 = parseInt(oOldPrice);
-				let nParse2 = parseInt(nPrice);
-				let nNewPrice = nParse1 - nParse2;
-				oModel.setProperty("/cartvalue", nNewPrice);
+				let nOldPrice = parseInt(oOldPrice);
+				let nNewPrice = parseInt(oDeleteRecord.ProductPrice);
+				let nUpdatePrice = nOldPrice - nNewPrice;
+				oModel.setProperty("/cartvalue", nUpdatePrice);
 				oModel.getProperty("/noitems");
-				let oLen = oData.length;
-				oModel.setProperty("/noitems", oLen);
+				let nLen = aCart.length;
+				oModel.setProperty("/noitems", nLen);
 				sap.m.MessageToast.show("ItemRemoved");
 			}
 		}

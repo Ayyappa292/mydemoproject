@@ -43,7 +43,6 @@ sap.ui.define([
 	 * Category Selection change Function
 	 */
 	onSelectChange : function(oEvent) {
-		debugger;
 		let list = this.getView().byId("listid").getSelectedItem();
 		let oObj = list.getBindingContext("myModel").getObject();
 		let aProductData = oObj.to_product.results;
@@ -104,7 +103,6 @@ sap.ui.define([
 		 * For Item Details
 		 */
 		onItemPress: function(oEvent){
-			debugger;
 			let oModel = this.getView().getModel("myModel");
 			let oObj = oEvent.getSource().getSelectedItem().getBindingContext("myModel").getObject();
 			let aArray =  oModel.getProperty("/productdetails");
@@ -165,10 +163,19 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			 oRouter.navTo("firstview");
 		},
-		onMyOrders : function (){
-			
+		onMyOrders : function (){	
+			let oModel = this.getView().getModel("myModel");
+			let oCurrentUser = oModel.getProperty("/currentUser");
+			let aOrders = oCurrentUser.to_orders.results;
+			oModel.setProperty("/aOrders",aOrders);	
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("myorders");
+			var oDialog = sap.ui
+			.xmlfragment("mydemoproject.myfragments.BusyDialog");
+	oDialog.open();
+	setTimeout(function() {
+		oDialog.close();
+	}, 3000);
 		},
 		/*
 		 * Show Notifications
